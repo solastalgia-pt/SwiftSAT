@@ -1,0 +1,162 @@
+[
+  {
+    "word": "vindicate",
+    "definition": "to clear someone of blame or suspicion; to show to be right or justified",
+    "part_of_speech": "v.",
+    "song_title": "Look What You Made Me Do",
+    "sentence": "Everything she'd done was, in her mind, an attempt to __________ herself — to prove the story the world told about her was wrong.",
+    "distractors": ["condemn", "incriminate", "defame"]
+  },
+  {
+    "word": "notorious",
+    "definition": "famous or well known, typically for some bad quality or deed",
+    "part_of_speech": "adj.",
+    "song_title": "Look What You Made Me Do",
+    "sentence": "She leaned into being __________, deciding that if they were going to tell her story, she'd write the ending herself.",
+    "distractors": ["obscure", "anonymous", "virtuous"]
+  },
+  {
+    "word": "malign",
+    "definition": "to speak about someone in a spitefully critical manner; evil in nature",
+    "part_of_speech": "v./adj.",
+    "song_title": "This Is Why We Can't Have Nice Things",
+    "sentence": "They had spent years trying to __________ her, twisting every word she said into evidence for the case against her.",
+    "distractors": ["praise", "defend", "champion"]
+  },
+  {
+    "word": "defiant",
+    "definition": "showing open resistance or bold disobedience",
+    "part_of_speech": "adj.",
+    "song_title": "...Ready for It?",
+    "sentence": "She arrived at the show looking __________ — daring anyone in the crowd or the press box to underestimate her again.",
+    "distractors": ["submissive", "yielding", "apologetic"]
+  },
+  {
+    "word": "duplicitous",
+    "definition": "deceitful; saying one thing while meaning or doing another",
+    "part_of_speech": "adj.",
+    "song_title": "End Game",
+    "sentence": "She had trusted him completely, which made discovering how __________ he'd been all along hit twice as hard.",
+    "distractors": ["sincere", "honest", "transparent"]
+  },
+  {
+    "word": "treacherous",
+    "definition": "guilty of betrayal; dangerous and unpredictable",
+    "part_of_speech": "adj.",
+    "song_title": "Getaway Car",
+    "sentence": "She knew the road they were on was __________ — beautiful and reckless, leading somewhere neither of them had planned for.",
+    "distractors": ["safe", "reliable", "predictable"]
+  },
+  {
+    "word": "nefarious",
+    "definition": "wicked or criminal in nature",
+    "part_of_speech": "adj.",
+    "song_title": "I Did Something Bad",
+    "sentence": "The tabloids painted her as something __________, dangerous and calculating — a villain in a story they'd written without her input.",
+    "distractors": ["virtuous", "benign", "innocent"]
+  },
+  {
+    "word": "cunning",
+    "definition": "having or showing skill in achieving one's ends by deceit or evasion",
+    "part_of_speech": "adj.",
+    "song_title": "End Game",
+    "sentence": "He mistook her for reckless when she was actually __________, already ten moves ahead of everyone in the room.",
+    "distractors": ["naive", "careless", "oblivious"]
+  },
+  {
+    "word": "retaliate",
+    "definition": "to make an attack in return for a similar attack",
+    "part_of_speech": "v.",
+    "song_title": "Look What You Made Me Do",
+    "sentence": "Rather than apologize and retreat, she chose to __________ — using her music as the weapon they'd always accused her of having.",
+    "distractors": ["forgive", "yield", "retreat"]
+  },
+  {
+    "word": "stigma",
+    "definition": "a mark of disgrace associated with a particular circumstance or quality",
+    "part_of_speech": "n.",
+    "song_title": "This Is Why We Can't Have Nice Things",
+    "sentence": "She had spent years fighting the __________ attached to her name, the assumption that she was always the problem.",
+    "distractors": ["honor", "prestige", "accolade"]
+  },
+  {
+    "word": "subversive",
+    "definition": "seeking to undermine the power of an established system or institution",
+    "part_of_speech": "adj.",
+    "song_title": "Look What You Made Me Do",
+    "sentence": "The video was deliberately __________ — dismantling the very image people had constructed of her while they watched.",
+    "distractors": ["conventional", "conformist", "mainstream"]
+  },
+  {
+    "word": "vindictive",
+    "definition": "having or showing a strong desire to harm someone who has harmed you",
+    "part_of_speech": "adj.",
+    "song_title": "Bad Blood",
+    "sentence": "Her critics called her __________, but she saw it differently: she was simply someone who refused to absorb cruelty in silence.",
+    "distractors": ["forgiving", "magnanimous", "merciful"]
+  },
+  {
+    "word": "vilify",
+    "definition": "to speak or write about in an abusively disparaging manner",
+    "part_of_speech": "v.",
+    "song_title": "This Is Why We Can't Have Nice Things",
+    "sentence": "The media would __________ her no matter what she did, so she decided to give them something worth writing about.",
+    "distractors": ["praise", "defend", "celebrate"]
+  },
+  {
+    "word": "infamy",
+    "definition": "the state of being well known for some bad quality or deed",
+    "part_of_speech": "n.",
+    "song_title": "Look What You Made Me Do",
+    "sentence": "She had earned a kind of __________ she hadn't asked for, and she was determined to alchemize it into power.",
+    "distractors": ["obscurity", "anonymity", "honor"]
+  },
+  {
+    "word": "brazen",
+    "definition": "bold and without shame; made of brass",
+    "part_of_speech": "adj.",
+    "song_title": "...Ready for It?",
+    "sentence": "She was __________ in a way the critics hadn't expected — not apologetic, not defensive, but entirely, dangerously unafraid.",
+    "distractors": ["timid", "meek", "sheepish"]
+  },
+  {
+    "word": "ostracize",
+    "definition": "to exclude from a society or group",
+    "part_of_speech": "v.",
+    "song_title": "Delicate",
+    "sentence": "She feared being __________ by people who only knew the version of her that existed in headlines.",
+    "distractors": ["embrace", "welcome", "celebrate"]
+  },
+  {
+    "word": "rebuke",
+    "definition": "to express sharp disapproval or criticism of someone because of their behavior",
+    "part_of_speech": "v./n.",
+    "song_title": "This Is Why We Can't Have Nice Things",
+    "sentence": "She delivered a sharp public __________ to every fake friend who had smiled at her while talking behind her back.",
+    "distractors": ["praise", "endorsement", "commendation"]
+  },
+  {
+    "word": "provocative",
+    "definition": "causing annoyance, anger, or another strong reaction; deliberately stimulating",
+    "part_of_speech": "adj.",
+    "song_title": "I Did Something Bad",
+    "sentence": "Her performance was deliberately __________, designed to unsettle the people who had grown comfortable dismissing her.",
+    "distractors": ["benign", "inoffensive", "mild"]
+  },
+  {
+    "word": "sycophant",
+    "definition": "a person who acts obsequiously toward someone powerful for personal gain",
+    "part_of_speech": "n.",
+    "song_title": "This Is Why We Can't Have Nice Things",
+    "sentence": "She could always tell a __________ from a real friend — one showed up only when the spotlight was on.",
+    "distractors": ["critic", "adversary", "rival"]
+  },
+  {
+    "word": "censure",
+    "definition": "to express severe disapproval of someone, especially in a formal statement",
+    "part_of_speech": "v./n.",
+    "song_title": "Look What You Made Me Do",
+    "sentence": "The critics chose to publicly __________ her at every turn, which only gave her more material to work with.",
+    "distractors": ["praise", "commend", "endorse"]
+  }
+]
