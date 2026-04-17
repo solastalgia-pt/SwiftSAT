@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swiftie Streak — SAT Vocab</title>
+  <link rel="stylesheet" href="assets/era-themes.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--era-font, 'Georgia', serif);
+      background: var(--era-bg, #1a1a2e);
+      color: var(--era-text, #f0f0f0);
+      transition: background 0.6s ease, color 0.4s ease;
+    }
+
+    #app {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 5rem;
+    }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    h1 { font-family: var(--era-title-font); font-size: clamp(1.6rem,4vw,2.2rem); color: var(--era-primary); text-align: center; margin-bottom: 0.2rem; }
+    h2 { font-family: var(--era-title-font); font-size: 1.2rem; color: var(--era-primary); }
+    .subtitle { text-align: center; font-size: 0.82rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem; }
+
+    /* ── App nav ── */
+    .app-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.75rem;
+    }
+    .nav-link {
+      font-size: 0.78rem;
+      opacity: 0.45;
+      color: var(--era-text);
+      text-decoration: none;
+      border: 1px solid var(--era-border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      transition: opacity 0.2s;
+    }
+    .nav-link:hover { opacity: 0.85; }
+
+    /* ── Dashboard ── */
+    .streak-display {
+      font-size: 3.8rem;
+      font-weight: bold;
+      color: var(--era-primary);
+      line-height: 1;
+      text-align: center;
+      margin: 0.4rem 0 0.2rem;
+    }
+    .streak-label {
+      text-align: center;
+      font-size: 0.78rem;
+      opacity: 0.45;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.75rem;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+    }
+    .stat-card {
+      background: var(--era-card);
+      border: 1px solid var(--era-border);
+      border-radius: 10px;
+      padding: 0.85rem 0.6rem;
+      text-align: center;
+    }
+    .stat-number { font-size: 1.55rem; font-weight: bold; color: var(--era-primary); line-height: 1; margin-bottom: 0.25rem; }
+    .stat-label  { font-size: 0.68rem; opacity: 0.48; text-transform: uppercase; letter-spacing: 0.07em; }
+
+    .primary-btn {
+      display: block; width: 100%;
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--era-border);
+      background: var(--era-button);
+      color: var(--era-primary);
+      font-size: 1rem;
+      font-family: var(--era-font);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.1s;
+      margin-bottom: 0.7rem;
+      text-align: center;
+    }
+    .primary-btn:hover:not(:disabled) { background: var(--era-button-hover); transform: translateY(-1px); }
+    .primary-btn:disabled { opacity: 0.38; cursor: default; transform: none; }
+
+    .secondary-btn {
+      display: block; width: 100%;
+      padding: 0.65rem;
+      border-radius: 10px;
+      border: 1px solid var(--era-border);
+      background: transparent;
+      color: var(--era-text);
+      opacity: 0.55;
+      font-size: 0.88rem;
+      font-family: var(--era-font);
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-align: center;
+    }
+    .secondary-btn:hover { opacity: 1; }
+
+    /* Era dots row */
+    .era-dots { display: flex; gap: 0.45rem; justify-content: center; flex-wrap: wrap; margin: 1.4rem 0 0; }
+    .era-dot {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2px solid;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem;
+      cursor: pointer;
+      transition: transform 0.15s;
+      flex-shrink: 0;
+      title: '';
+    }
+    .era-dot:hover { transform: scale(1.18); }
+    .era-dot.locked { opacity: 0.22; filter: grayscale(1); cursor: default; }
+
+    /* ── Study screen ── */
+    .study-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .back-btn {
+      background: none;
+      border: 1px solid var(--era-border);
+      color: var(--era-primary);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--era-font);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: var(--era-button-hover); }
+
+    .session-progress { flex: 1; height: 5px; background: var(--era-border); border-radius: 3px; overflow: hidden; }
+    .session-bar { height: 100%; background: var(--era-primary); border-radius: 3px; transition: width 0.35s ease; }
+    .session-count { font-size: 0.8rem; color: var(--era-primary); white-space: nowrap; }
+
+    /* Card flip */
+    .card-perspective { perspective: 1100px; margin-bottom: 1.2rem; }
+
+    .card {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card.flipped { transform: rotateY(180deg); }
+
+    .card-face {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--era-border);
+      background: var(--era-card);
+      padding: 1.75rem 1.6rem;
+    }
+
+    /* Front stays in normal flow, sets height */
+    .card-front-face { position: relative; }
+
+    /* Back overlaps the front */
+    .card-back-face {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      transform: rotateY(180deg);
+      min-height: 100%;
+    }
+
+    .card-era-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.42; margin-bottom: 0.45rem; }
+    .card-song { font-size: 0.9rem; color: var(--era-accent); font-style: italic; margin-bottom: 1.2rem; }
+    .card-sentence { font-size: clamp(0.98rem, 2.4vw, 1.18rem); line-height: 1.75; }
+    .blank {
+      display: inline-block;
+      min-width: 110px;
+      border-bottom: 2px solid var(--era-primary);
+      color: var(--era-primary);
+      font-weight: bold;
+      text-align: center;
+    }
+    .card-tap-hint { margin-top: 1.5rem; font-size: 0.75rem; opacity: 0.3; text-align: center; letter-spacing: 0.06em; }
+
+    /* Word — shown on front */
+    .card-word       { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: bold; color: var(--era-primary); margin: 1.2rem 0 0.3rem; text-align: center; }
+    .card-pos        { font-size: 0.82rem; opacity: 0.5; font-style: italic; text-align: center; margin-bottom: 0.55rem; }
+    .card-definition { font-size: 0.93rem; line-height: 1.65; opacity: 0.84; margin-bottom: 0.9rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--era-border); }
+    .card-filled     { font-size: 0.87rem; line-height: 1.65; opacity: 0.62; font-style: italic; }
+
+    /* Show answer button */
+    .show-answer-btn {
+      display: block; width: 100%;
+      padding: 0.88rem;
+      border-radius: 10px;
+      border: 1px solid var(--era-border);
+      background: var(--era-button);
+      color: var(--era-primary);
+      font-size: 0.98rem;
+      font-family: var(--era-font);
+      cursor: pointer;
+      text-align: center;
+      letter-spacing: 0.04em;
+      transition: background 0.2s;
+    }
+    .show-answer-btn:hover { background: var(--era-button-hover); }
+
+    /* Rating buttons */
+    .rating-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; }
+    @media (max-width: 380px) { .rating-row { grid-template-columns: repeat(2, 1fr); } }
+
+    .rating-btn {
+      padding: 0.62rem 0.4rem;
+      border-radius: 9px;
+      border: 1px solid var(--era-border);
+      background: var(--era-button);
+      color: var(--era-text);
+      font-family: var(--era-font);
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.14s, transform 0.08s;
+      display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+    }
+    .rating-btn:hover { background: var(--era-button-hover); transform: translateY(-1px); }
+
+    .rating-name     { font-size: 0.86rem; font-weight: bold; }
+    .rating-interval { font-size: 0.7rem; opacity: 0.5; }
+
+    .r-again { border-color: rgba(248,113,113,0.45); }  .r-again .rating-name { color: #f87171; }
+    .r-hard  { border-color: rgba(251,146,60,0.45); }   .r-hard  .rating-name { color: #fb923c; }
+    .r-good  { border-color: rgba(74,222,128,0.45); }   .r-good  .rating-name { color: #4ade80; }
+    .r-easy  { border-color: rgba(96,165,250,0.45); }   .r-easy  .rating-name { color: #60a5fa; }
+
+    /* ── Era Map ── */
+    .map-section { margin-bottom: 2rem; }
+    .map-tier-header {
+      display: flex; align-items: baseline; gap: 0.6rem;
+      margin-bottom: 0.8rem; padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--era-border);
+    }
+    .map-tier-label { font-size: 0.68rem; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; }
+    .map-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 0.7rem; }
+
+    .map-card {
+      border: 1px solid var(--era-border);
+      border-radius: 10px;
+      padding: 0.95rem 0.85rem;
+      background: var(--era-card);
+      position: relative; overflow: hidden;
+    }
+    .map-card.locked { opacity: 0.3; }
+    .map-card-name  { font-size: 0.92rem; font-weight: bold; margin-bottom: 0.15rem; }
+    .map-card-year  { font-size: 0.7rem; opacity: 0.42; margin-bottom: 0.6rem; }
+    .map-bar-bg     { height: 4px; background: var(--era-border); border-radius: 2px; margin-bottom: 0.35rem; }
+    .map-bar        { height: 4px; border-radius: 2px; transition: width 0.4s ease; }
+    .map-card-stats { font-size: 0.73rem; opacity: 0.5; }
+    .map-lock       { position: absolute; top: 7px; right: 8px; font-size: 0.85rem; opacity: 0.55; }
+
+    /* ── Session complete ── */
+    #complete-screen { text-align: center; padding: 2.5rem 0 1rem; }
+    .complete-big { font-size: 3rem; margin-bottom: 1rem; }
+    #complete-message { opacity: 0.58; font-style: italic; font-size: 0.88rem; margin: 0.5rem auto 1.75rem; max-width: 420px; line-height: 1.6; }
+    .complete-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin-bottom: 1.75rem; }
+
+    /* ── Unlock toast ── */
+    #unlock-toast {
+      position: fixed;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--era-card);
+      border: 1px solid var(--era-primary);
+      border-radius: 14px;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      z-index: 200;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      min-width: 230px;
+    }
+    #unlock-toast.show { transform: translateX(-50%) translateY(0); }
+    .toast-eyebrow { font-size: 0.7rem; opacity: 0.45; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .toast-name    { font-size: 1.1rem; font-weight: bold; color: var(--era-primary); }
+    .toast-icon    { font-size: 1.6rem; margin-bottom: 0.35rem; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--era-border); border-radius: 3px; }
+
+    /* ── How It Works ── */
+    .how-it-works {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--era-border);
+    }
+    .how-title {
+      font-family: var(--era-title-font, Georgia, serif);
+      font-size: 1.25rem;
+      color: var(--era-primary);
+      margin-bottom: 0.75rem;
+    }
+    .how-intro {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      opacity: 0.75;
+      margin-bottom: 1.5rem;
+    }
+    .how-section { margin-bottom: 1.5rem; }
+    .how-sub {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--era-accent);
+      margin-bottom: 0.55rem;
+      letter-spacing: 0.02em;
+    }
+    .how-list {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      opacity: 0.78;
+      padding-left: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .how-bullets {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      opacity: 0.78;
+      padding-left: 1.2rem;
+      list-style: disc;
+    }
+    .how-bullets li { margin-bottom: 0.15rem; }
+    kbd {
+      display: inline-block;
+      padding: 0.1em 0.45em;
+      border-radius: 4px;
+      border: 1px solid var(--era-border);
+      background: var(--era-button);
+      font-size: 0.8em;
+      font-family: monospace;
+      color: var(--era-primary);
+    }
+
+    /* Rating table */
+    .rating-table {
+      border: 1px solid var(--era-border);
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 0.83rem;
+      margin-bottom: 0.85rem;
+    }
+    .rt-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1.6fr;
+      padding: 0.55rem 0.85rem;
+      border-bottom: 1px solid var(--era-border);
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .rt-row:last-child { border-bottom: none; }
+    .rt-head {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.45;
+      background: var(--era-button);
+    }
+    .rt-row:not(.rt-head) { opacity: 0.82; }
+    .rt-dot {
+      display: inline-block;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="era-midnights">
+<div id="app">
+
+  <!-- ══ DASHBOARD ══ -->
+  <div id="dash-screen" class="screen active">
+    <div class="app-nav">
+      <a href="index.html" class="nav-link">Quiz Mode →</a>
+    </div>
+    <h1>Swiftie Streak</h1>
+    <p class="subtitle">SAT Vocab · Spaced Repetition</p>
+
+    <div class="streak-display" id="streak-num">0 🔥</div>
+    <div class="streak-label">day streak</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-number" id="stat-due">0</div>
+        <div class="stat-label">Due Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-new">0</div>
+        <div class="stat-label">New Cards</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-mastered">0</div>
+        <div class="stat-label">Mastered</div>
+      </div>
+    </div>
+
+    <button class="primary-btn" id="study-btn">Study Now</button>
+    <button class="secondary-btn" id="map-btn">Era Progress Map</button>
+
+    <div class="era-dots" id="era-dots"></div>
+
+    <!-- How It Works -->
+    <div class="how-it-works">
+      <h2 class="how-title">How It Works</h2>
+
+      <p class="how-intro">Instead of quizzing you randomly, Streak Mode uses <strong>spaced repetition</strong> — words you find hard come back sooner, words you know well come back later (days or weeks). Same method behind Anki and Duolingo.</p>
+
+      <div class="how-section">
+        <h3 class="how-sub">A Study Session, Step by Step</h3>
+        <ol class="how-list">
+          <li>You see a flashcard — the front shows an SAT word</li>
+          <li>Think about the definition, then press <kbd>Space</kbd> (or tap the card) to flip it</li>
+          <li>The back reveals the full definition and an example sentence</li>
+          <li>Rate how well you knew it:</li>
+        </ol>
+        <div class="rating-table">
+          <div class="rt-row rt-head">
+            <span>Button</span><span>Meaning</span><span>When to use</span>
+          </div>
+          <div class="rt-row">
+            <span><span class="rt-dot" style="background:#ef4444"></span>Again</span>
+            <span>I had no idea</span>
+            <span>Totally blank</span>
+          </div>
+          <div class="rt-row">
+            <span><span class="rt-dot" style="background:#f97316"></span>Hard</span>
+            <span>I kind of knew it</span>
+            <span>Vague or wrong</span>
+          </div>
+          <div class="rt-row">
+            <span><span class="rt-dot" style="background:#22c55e"></span>Good</span>
+            <span>I got it</span>
+            <span>Correct but took effort</span>
+          </div>
+          <div class="rt-row">
+            <span><span class="rt-dot" style="background:#3b82f6"></span>Easy</span>
+            <span>Too easy</span>
+            <span>Instant recall</span>
+          </div>
+        </div>
+        <ul class="how-bullets">
+          <li><strong>Again</strong> → back in 10 minutes (same session)</li>
+          <li><strong>Good</strong> → back in 1 day, then 6 days, then longer and longer</li>
+          <li><strong>Easy</strong> → skips ahead even further</li>
+        </ul>
+      </div>
+
+      <div class="how-section">
+        <h3 class="how-sub">The Streak 🔥</h3>
+        <ul class="how-bullets">
+          <li>Your daily goal is <strong>10 cards</strong></li>
+          <li>Study every day → your streak number goes up</li>
+          <li>Miss a day → streak resets to 0</li>
+        </ul>
+      </div>
+
+      <div class="how-section">
+        <h3 class="how-sub">Era Unlocking</h3>
+        <ul class="how-bullets">
+          <li>You start with the <strong>Taylor Swift</strong> debut era only</li>
+          <li>Once you've seen every card in an era, the next era unlocks</li>
+          <li>Eras go from Easy → Medium → Advanced vocabulary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STUDY ══ -->
+  <div id="study-screen" class="screen">
+    <div class="study-header">
+      <button class="back-btn" id="study-quit-btn">← Quit</button>
+      <div class="session-progress">
+        <div class="session-bar" id="session-bar" style="width:0%"></div>
+      </div>
+      <div class="session-count" id="session-count">—</div>
+    </div>
+
+    <div class="card-perspective">
+      <div class="card" id="the-card">
+        <div class="card-face card-front-face" id="card-front">
+          <div class="card-era-label" id="c-era">🎵</div>
+          <div class="card-word"      id="c-word"></div>
+          <div class="card-pos"       id="c-pos"></div>
+          <div class="card-tap-hint">tap card · or press space</div>
+        </div>
+        <div class="card-face card-back-face" id="card-back">
+          <div class="card-era-label" id="c-era-back">🎵</div>
+          <div class="card-song"      id="c-song"></div>
+          <div class="card-definition" id="c-def"></div>
+          <div class="card-filled"     id="c-sent-back"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="action-area">
+      <button class="show-answer-btn" id="show-btn">Show Answer</button>
+    </div>
+
+    <div id="rating-area" style="display:none">
+      <div class="rating-row">
+        <button class="rating-btn r-again" data-r="1">
+          <span class="rating-name">Again</span>
+          <span class="rating-interval" id="p-again">10m</span>
+        </button>
+        <button class="rating-btn r-hard" data-r="2">
+          <span class="rating-name">Hard</span>
+          <span class="rating-interval" id="p-hard">—</span>
+        </button>
+        <button class="rating-btn r-good" data-r="3">
+          <span class="rating-name">Good</span>
+          <span class="rating-interval" id="p-good">—</span>
+        </button>
+        <button class="rating-btn r-easy" data-r="4">
+          <span class="rating-name">Easy</span>
+          <span class="rating-interval" id="p-easy">—</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ERA MAP ══ -->
+  <div id="map-screen" class="screen">
+    <div class="study-header" style="margin-bottom:1.5rem">
+      <button class="back-btn" id="map-back-btn">← Back</button>
+      <h2 style="flex:1;text-align:center">Era Progress</h2>
+      <div style="width:60px"></div>
+    </div>
+    <div id="map-content"></div>
+  </div>
+
+  <!-- ══ COMPLETE ══ -->
+  <div id="complete-screen" class="screen">
+    <div class="complete-big" id="complete-icon">✨</div>
+    <h2>Session Complete</h2>
+    <p id="complete-message"></p>
+    <div class="complete-stats">
+      <div class="stat-card">
+        <div class="stat-number" id="c-reviewed">—</div>
+        <div class="stat-label">Reviewed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="c-new">—</div>
+        <div class="stat-label">New Words</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="c-streak">—</div>
+        <div class="stat-label">Day Streak</div>
+      </div>
+    </div>
+    <button class="primary-btn" id="complete-dash-btn">Back to Dashboard</button>
+    <button class="secondary-btn" style="margin-top:0.5rem" id="complete-map-btn">View Era Map</button>
+  </div>
+
+  <!-- ══ UNLOCK TOAST ══ -->
+  <div id="unlock-toast">
+    <div class="toast-icon"    id="toast-icon">✨</div>
+    <div class="toast-eyebrow">Era Unlocked</div>
+    <div class="toast-name"    id="toast-name">Fearless</div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  SWIFTIE STREAK  —  Spaced Repetition SAT Vocab
+//  SRS: SM-2 algorithm (same family as Anki)
+// ═══════════════════════════════════════════════════════════
+
+const NEW_PER_SESSION = 10;
+const DAILY_GOAL      = 10;
+
+const R = { AGAIN: 1, HARD: 2, GOOD: 3, EASY: 4 };
+const S = { NEW: 0, LEARNING: 1, REVIEW: 2, RELEARNING: 3 };
+
+// ── Era definitions ──────────────────────────────────────────
+const ERAS = [
+  { id:'taylor-swift', name:'Taylor Swift', year:'2006', file:'taylor-swift.json', css:'era-taylor-swift', emoji:'🌟', diff:'easy'     },
+  { id:'fearless',     name:'Fearless',     year:'2008', file:'fearless.json',     css:'era-fearless',     emoji:'✨', diff:'easy'     },
+  { id:'speak-now',    name:'Speak Now',    year:'2010', file:'speak-now.json',    css:'era-speak-now',    emoji:'💜', diff:'easy'     },
+  { id:'red',          name:'Red',          year:'2012', file:'red.json',          css:'era-red',          emoji:'🍂', diff:'medium'   },
+  { id:'1989',         name:'1989',         year:'2014', file:'1989.json',         css:'era-1989',         emoji:'📷', diff:'medium'   },
+  { id:'reputation',   name:'reputation',   year:'2017', file:'reputation.json',   css:'era-reputation',   emoji:'🐍', diff:'medium'   },
+  { id:'lover',        name:'Lover',        year:'2019', file:'lover.json',        css:'era-lover',        emoji:'🌈', diff:'medium'   },
+  { id:'folklore',     name:'folklore',     year:'2020', file:'folklore.json',     css:'era-folklore',     emoji:'🌿', diff:'advanced' },
+  { id:'evermore',     name:'evermore',     year:'2020', file:'evermore.json',     css:'era-evermore',     emoji:'🍁', diff:'advanced' },
+  { id:'midnights',    name:'Midnights',    year:'2022', file:'midnights.json',    css:'era-midnights',    emoji:'🌙', diff:'advanced' },
+  { id:'ttpd',         name:'TTPD',         year:'2024', file:'ttpd.json',         css:'era-ttpd',         emoji:'🖊️', diff:'advanced' },
+];
+
+const ERA_MAP = Object.fromEntries(ERAS.map(e => [e.id, e]));
+
+const ERA_COLOR = {
+  'taylor-swift':'#f5c842','fearless':'#ffc04c','speak-now':'#c084fc',
+  'red':'#ef4444','1989':'#60a5fa','reputation':'#d1d5db','lover':'#f472b6',
+  'folklore':'#9ca3af','evermore':'#d97706','midnights':'#a78bfa','ttpd':'#d4c5a0',
+};
+
+const TIER_CFG = {
+  easy:     { label:'Easy',     color:'#4ade80' },
+  medium:   { label:'Medium',   color:'#fb923c' },
+  advanced: { label:'Advanced', color:'#f87171' },
+};
+
+// ── SM-2 SRS Algorithm ───────────────────────────────────────
+function makeCard() {
+  return { state:S.NEW, interval:0, repetitions:0, easeFactor:2.5, lapses:0, due:null };
+}
+
+function schedule(card, rating, now = new Date()) {
+  const c = { ...card };
+
+  if (rating === R.AGAIN) {
+    if (c.state === S.REVIEW) c.lapses = (c.lapses || 0) + 1;
+    c.repetitions = 0;
+    c.interval    = 0;
+    c.easeFactor  = Math.max(1.3, c.easeFactor - 0.2);
+    c.state       = c.state === S.NEW ? S.LEARNING : S.RELEARNING;
+    c.due         = new Date(now.getTime() + 10 * 60 * 1000);
+    return c;
+  }
+
+  let iv;
+  if      (c.repetitions === 0) iv = 1;
+  else if (c.repetitions === 1) iv = 6;
+  else                          iv = Math.round(c.interval * c.easeFactor);
+
+  if (rating === R.HARD) iv = Math.max(1, Math.round(iv * 0.8));
+  if (rating === R.EASY) iv = Math.round(iv * 1.3);
+  iv = Math.max(1, iv);
+
+  const q = rating === R.HARD ? 3 : rating === R.GOOD ? 4 : 5;
+  c.easeFactor  = Math.max(1.3, c.easeFactor + 0.1 - (5-q)*(0.08 + (5-q)*0.02));
+  c.interval    = iv;
+  c.repetitions += 1;
+  c.state       = S.REVIEW;
+  c.due         = new Date(now.getTime() + iv * 86400000);
+  return c;
+}
+
+function previews(card) {
+  const n = new Date();
+  return {
+    again: '10m',
+    hard:  fmtIv(schedule(card, R.HARD, n).interval),
+    good:  fmtIv(schedule(card, R.GOOD, n).interval),
+    easy:  fmtIv(schedule(card, R.EASY, n).interval),
+  };
+}
+
+function fmtIv(d) {
+  if (!d || d < 1) return '10m';
+  if (d  === 1)    return '1d';
+  if (d  < 30)     return d + 'd';
+  if (d  < 365)    return Math.round(d/30) + 'mo';
+  return Math.round(d/365) + 'yr';
+}
+
+function isDue(card, now = new Date()) {
+  return card.due && new Date(card.due) <= now;
+}
+
+// ── Storage ──────────────────────────────────────────────────
+function loadCards() { try { return JSON.parse(localStorage.getItem('ss-cards')) || {}; } catch { return {}; } }
+function loadMeta()  { try { return JSON.parse(localStorage.getItem('ss-meta'))  || {}; } catch { return {}; } }
+function saveCards(c){ localStorage.setItem('ss-cards', JSON.stringify(c)); }
+function saveMeta(m) { localStorage.setItem('ss-meta',  JSON.stringify(m)); }
+
+function defaultMeta() {
+  return { streak:0, lastDate:null, reviewedToday:0, totalReviewed:0, todayStr:day(), unlockedEras:['taylor-swift'] };
+}
+
+function day() { return new Date().toISOString().slice(0,10); }
+
+function tickStreak(meta, count) {
+  const today = day();
+  if (meta.todayStr !== today) {
+    const yest = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    if (meta.lastDate !== yest && meta.lastDate !== today) meta.streak = 0;
+    meta.reviewedToday = 0;
+    meta.todayStr = today;
+  }
+  meta.reviewedToday = (meta.reviewedToday||0) + count;
+  meta.totalReviewed = (meta.totalReviewed||0) + count;
+  if (meta.reviewedToday >= DAILY_GOAL && meta.lastDate !== today) {
+    meta.streak = (meta.streak||0) + 1;
+    meta.lastDate = today;
+  }
+  return meta;
+}
+
+// ── Era unlock check ─────────────────────────────────────────
+function checkUnlocks(cards, meta) {
+  const unlocked = [...(meta.unlockedEras || ['taylor-swift'])];
+  const fresh = [];
+
+  ERAS.forEach((era, idx) => {
+    if (idx === 0 || unlocked.includes(era.id)) return;
+    const prev = ERAS[idx-1];
+    if (!unlocked.includes(prev.id)) return;
+
+    const prevCards = Object.entries(cards)
+      .filter(([id]) => id.startsWith(prev.id + '-'))
+      .map(([,c]) => c);
+
+    if (prevCards.length === 0) return;
+    if (prevCards.every(c => c.repetitions > 0)) {
+      unlocked.push(era.id);
+      fresh.push(era);
+    }
+  });
+
+  meta.unlockedEras = unlocked;
+  return { meta, fresh };
+}
+
+// ── Card ID helpers ───────────────────────────────────────────
+function cid(eraId, i)  { return `${eraId}-${i}`; }
+function parseCid(id)   {
+  const d = id.lastIndexOf('-');
+  return { eraId: id.slice(0,d), idx: parseInt(id.slice(d+1)) };
+}
+
+// ── App state ─────────────────────────────────────────────────
+const A = { questions:{}, cards:{}, meta:{}, session:null };
+
+async function loadEra(era) {
+  if (A.questions[era.id]) return;
+  const res = await fetch(`data/questions/${era.file}`);
+  A.questions[era.id] = await res.json();
+  A.questions[era.id].forEach((_,i) => {
+    const id = cid(era.id,i);
+    if (!A.cards[id]) A.cards[id] = makeCard();
+  });
+}
+
+async function loadUnlocked() {
+  await Promise.all(A.meta.unlockedEras.map(id => {
+    const e = ERA_MAP[id]; return e ? loadEra(e) : Promise.resolve();
+  }));
+}
+
+// ── Build session queue ───────────────────────────────────────
+function buildQueue() {
+  const now = new Date();
+  const reviews = [], newCards = [];
+
+  A.meta.unlockedEras.forEach(eraId => {
+    const qs = A.questions[eraId]; if (!qs) return;
+    qs.forEach((_,i) => {
+      const id = cid(eraId,i);
+      const c  = A.cards[id]; if (!c) return;
+      if (c.state !== S.NEW && isDue(c,now)) reviews.push(id);
+      else if (c.state === S.NEW)            newCards.push(id);
+    });
+  });
+
+  return [...shuffle(reviews), ...newCards.slice(0, NEW_PER_SESSION)];
+}
+
+function shuffle(a) {
+  const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;
+}
+
+// ── UI helpers ────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function theme(cls) { document.body.className = cls; }
+
+// ── Dashboard ─────────────────────────────────────────────────
+function renderDash() {
+  show('dash-screen');
+  theme('era-midnights');
+
+  const now = new Date(); const today = day();
+  // Decay streak if missed a day
+  if (A.meta.todayStr !== today) {
+    const yest = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    if (A.meta.lastDate !== yest && A.meta.lastDate !== today) A.meta.streak = 0;
+  }
+
+  document.getElementById('streak-num').textContent = (A.meta.streak||0) + ' 🔥';
+
+  let due=0, newC=0, mastered=0;
+  A.meta.unlockedEras.forEach(eraId=>{
+    const qs=A.questions[eraId]; if(!qs) return;
+    qs.forEach((_,i)=>{
+      const c=A.cards[cid(eraId,i)]; if(!c) return;
+      if(c.state!==S.NEW && isDue(c,now)) due++;
+      else if(c.state===S.NEW) newC++;
+      if(c.state===S.REVIEW && c.repetitions>=3) mastered++;
+    });
+  });
+
+  document.getElementById('stat-due').textContent      = due;
+  document.getElementById('stat-new').textContent      = Math.min(newC, NEW_PER_SESSION);
+  document.getElementById('stat-mastered').textContent = mastered;
+
+  const total = due + Math.min(newC, NEW_PER_SESSION);
+  const btn = document.getElementById('study-btn');
+  btn.disabled    = total === 0;
+  btn.textContent = total > 0 ? `Study Now  (${total} cards)` : 'All caught up! 🎉';
+
+  // Era dots
+  const dotsEl = document.getElementById('era-dots'); dotsEl.innerHTML='';
+  ERAS.forEach(era=>{
+    const unlocked = A.meta.unlockedEras.includes(era.id);
+    const qs = A.questions[era.id]||[]; const total=qs.length||20;
+    const seen = qs.filter((_,i)=>{ const c=A.cards[cid(era.id,i)]; return c&&c.repetitions>0; }).length;
+    const dot = document.createElement('div');
+    dot.className = 'era-dot' + (unlocked?'':' locked');
+    dot.style.borderColor = unlocked ? ERA_COLOR[era.id] : 'rgba(255,255,255,0.2)';
+    dot.style.color       = unlocked ? ERA_COLOR[era.id] : 'rgba(255,255,255,0.2)';
+    dot.style.background  = unlocked ? ERA_COLOR[era.id]+'15' : 'transparent';
+    dot.textContent = era.emoji;
+    dot.setAttribute('title', `${era.name} (${era.year})${unlocked?' — '+Math.round(seen/total*100)+'% seen':' — locked'}`);
+    if(unlocked) dot.addEventListener('click', renderMap);
+    dotsEl.appendChild(dot);
+  });
+}
+
+// ── Study session ─────────────────────────────────────────────
+function startSession() {
+  const q = buildQueue(); if(q.length===0) return;
+  A.session = { queue:q, total:q.length, reviewed:0, newCount:0, againMap:{} };
+  show('study-screen');
+  nextCard();
+}
+
+function nextCard() {
+  const s = A.session;
+  if(s.queue.length===0){ finishSession(); return; }
+
+  const id = s.queue[0];
+  const {eraId,idx} = parseCid(id);
+  const era = ERA_MAP[eraId];
+  const q   = A.questions[eraId][idx];
+  const c   = A.cards[id];
+
+  theme(era.css);
+
+  const done = s.total - s.queue.length;
+  document.getElementById('session-bar').style.width = (done/s.total*100)+'%';
+  document.getElementById('session-count').textContent = s.queue.length + ' left';
+
+  // Front — show the word to recall
+  document.getElementById('c-era').textContent  = era.emoji + ' ' + era.name;
+  document.getElementById('c-word').textContent = q.word;
+  document.getElementById('c-pos').textContent  = q.part_of_speech;
+
+  // Back — reveal definition + sentence in context
+  document.getElementById('c-era-back').textContent = era.emoji + ' ' + era.name;
+  document.getElementById('c-song').textContent     = '"' + q.song_title + '"';
+  document.getElementById('c-def').textContent      = q.definition;
+  document.getElementById('c-sent-back').innerHTML  =
+    q.sentence.replace('__________', `<strong style="color:var(--era-primary)">${q.word}</strong>`);
+
+  // Preview intervals
+  const pv = previews(c);
+  document.getElementById('p-again').textContent = pv.again;
+  document.getElementById('p-hard').textContent  = pv.hard;
+  document.getElementById('p-good').textContent  = pv.good;
+  document.getElementById('p-easy').textContent  = pv.easy;
+
+  // Reset flip
+  document.getElementById('the-card').classList.remove('flipped');
+  document.getElementById('action-area').style.display = 'block';
+  document.getElementById('rating-area').style.display = 'none';
+}
+
+function flip() {
+  document.getElementById('the-card').classList.add('flipped');
+  document.getElementById('action-area').style.display = 'none';
+  document.getElementById('rating-area').style.display = 'block';
+}
+
+function rate(rating) {
+  const s  = A.session;
+  const id = s.queue.shift();
+  const wasNew = A.cards[id].state === S.NEW;
+
+  A.cards[id] = schedule(A.cards[id], rating);
+  saveCards(A.cards);
+
+  s.reviewed++;
+  if(wasNew) s.newCount++;
+
+  if(rating === R.AGAIN) {
+    s.againMap[id] = (s.againMap[id]||0) + 1;
+    if(s.againMap[id] <= 3) { s.queue.push(id); s.total++; }
+  }
+
+  // Check unlocks
+  const { meta:m2, fresh } = checkUnlocks(A.cards, A.meta);
+  A.meta = m2;
+  if(fresh.length > 0) {
+    fresh.forEach(e => loadEra(e));
+    showToast(fresh[0]);
+  }
+
+  nextCard();
+}
+
+function finishSession() {
+  A.meta = tickStreak(A.meta, A.session.reviewed);
+  saveMeta(A.meta);
+  theme('era-midnights');
+  show('complete-screen');
+
+  const msgs = [
+    '"Long live all the mountains we moved."',
+    '"This is me trying."',
+    '"She had a marvelous time ruining everything."',
+    '"I had the time of my life fighting dragons with you."',
+    '"It\'s been a long time coming."',
+    '"In my defense, I have none."',
+  ];
+  document.getElementById('complete-icon').textContent    = A.session.reviewed >= 15 ? '🌟' : '✨';
+  document.getElementById('complete-message').textContent = msgs[Math.floor(Math.random()*msgs.length)];
+  document.getElementById('c-reviewed').textContent = A.session.reviewed;
+  document.getElementById('c-new').textContent      = A.session.newCount;
+  document.getElementById('c-streak').textContent   = A.meta.streak || 0;
+}
+
+// ── Era Map ───────────────────────────────────────────────────
+function renderMap() {
+  show('map-screen'); theme('era-midnights');
+  const el = document.getElementById('map-content'); el.innerHTML='';
+
+  ['easy','medium','advanced'].forEach(tier=>{
+    const cfg   = TIER_CFG[tier];
+    const eras  = ERAS.filter(e=>e.diff===tier);
+    const sec   = document.createElement('div'); sec.className='map-section';
+    sec.innerHTML=`
+      <div class="map-tier-header">
+        <span class="map-tier-label" style="color:${cfg.color}">${cfg.label}</span>
+      </div>
+      <div class="map-row" id="mr-${tier}"></div>`;
+    el.appendChild(sec);
+
+    const row = sec.querySelector('.map-row');
+    eras.forEach(era=>{
+      const unlocked = A.meta.unlockedEras.includes(era.id);
+      const qs = A.questions[era.id]||[]; const total=20;
+      const seen = qs.filter((_,i)=>{const c=A.cards[cid(era.id,i)];return c&&c.repetitions>0;}).length;
+      const mast = qs.filter((_,i)=>{const c=A.cards[cid(era.id,i)];return c&&c.state===S.REVIEW&&c.repetitions>=3;}).length;
+      const pct  = total>0 ? Math.round(seen/total*100) : 0;
+      const col  = ERA_COLOR[era.id];
+
+      const card = document.createElement('div');
+      card.className = 'map-card' + (unlocked?'':' locked');
+      card.style.borderColor = unlocked ? col+'55' : '';
+      card.innerHTML=`
+        ${!unlocked?'<div class="map-lock">🔒</div>':''}
+        <div class="map-card-name" style="color:${unlocked?col:'inherit'}">${era.emoji} ${era.name}</div>
+        <div class="map-card-year">${era.year}</div>
+        <div class="map-bar-bg"><div class="map-bar" style="width:${unlocked?pct:0}%;background:${col}"></div></div>
+        <div class="map-card-stats">
+          ${unlocked ? `${seen}/20 seen · ${mast} mastered` : 'Complete previous era to unlock'}
+        </div>`;
+      row.appendChild(card);
+    });
+  });
+}
+
+// ── Unlock toast ──────────────────────────────────────────────
+function showToast(era) {
+  const t = document.getElementById('unlock-toast');
+  document.getElementById('toast-icon').textContent = era.emoji;
+  document.getElementById('toast-name').textContent = era.name;
+  t.style.borderColor = ERA_COLOR[era.id];
+  document.getElementById('toast-name').style.color = ERA_COLOR[era.id];
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3600);
+}
+
+// ── Event listeners ───────────────────────────────────────────
+document.getElementById('study-btn').addEventListener('click', startSession);
+document.getElementById('map-btn').addEventListener('click', renderMap);
+document.getElementById('map-back-btn').addEventListener('click', renderDash);
+document.getElementById('complete-dash-btn').addEventListener('click', renderDash);
+document.getElementById('complete-map-btn').addEventListener('click', renderMap);
+
+document.getElementById('study-quit-btn').addEventListener('click', ()=>{
+  if(A.session?.reviewed > 0) finishSession(); else renderDash();
+});
+
+document.getElementById('the-card').addEventListener('click', ()=>{
+  if(!document.getElementById('the-card').classList.contains('flipped')) flip();
+});
+document.getElementById('show-btn').addEventListener('click', flip);
+
+document.querySelectorAll('.rating-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>rate(parseInt(btn.dataset.r)));
+});
+
+// Space bar to flip / advance
+document.addEventListener('keydown', e=>{
+  if(e.code==='Space' && document.getElementById('study-screen').classList.contains('active')){
+    e.preventDefault();
+    if(!document.getElementById('the-card').classList.contains('flipped')) flip();
+  }
+  // 1-4 keys to rate
+  if(['Digit1','Digit2','Digit3','Digit4'].includes(e.code) &&
+      document.getElementById('rating-area').style.display !== 'none'){
+    rate(parseInt(e.code.replace('Digit','')));
+  }
+});
+
+// ── Init ──────────────────────────────────────────────────────
+async function init() {
+  A.cards = loadCards();
+  A.meta  = { ...defaultMeta(), ...loadMeta() };
+
+  try {
+    await loadUnlocked();
+  } catch(err) {
+    document.getElementById('stat-due').closest('.stats-row').insertAdjacentHTML('afterend',
+      `<p style="color:#f87171;font-size:0.83rem;text-align:center;margin:-0.5rem 0 1rem">
+        ⚠️ Run via a local server or GitHub Pages — fetch() is required.
+      </p>`);
+  }
+
+  renderDash();
+}
+
+init();
+</script>
+</body>
+</html>
