@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lyric Decoder — SAT Vocab</title>
+  <link rel="stylesheet" href="assets/era-themes.css" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--era-font, 'Georgia', serif);
+      background: var(--era-bg, #1a1a2e);
+      color: var(--era-text, #f0f0f0);
+      transition: background 0.6s ease, color 0.4s ease;
+    }
+
+    #app {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* ── Typography ── */
+    h1 {
+      font-family: var(--era-title-font, 'Georgia', serif);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: var(--era-primary);
+      letter-spacing: 0.03em;
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-family: var(--era-title-font, 'Georgia', serif);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      color: var(--era-primary);
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      opacity: 0.6;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Screens ── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── ERA SELECTION ── */
+    #era-grid {
+      margin-top: 1.5rem;
+    }
+
+    .difficulty-section {
+      margin-bottom: 2.25rem;
+    }
+
+    .difficulty-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--era-border);
+    }
+
+    .difficulty-label {
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .difficulty-desc {
+      font-size: 0.8rem;
+      opacity: 0.45;
+      font-style: italic;
+    }
+
+    .era-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .era-card {
+      border: 1px solid var(--card-border, rgba(255,255,255,0.2));
+      border-radius: 12px;
+      padding: 1.25rem 1rem;
+      cursor: pointer;
+      text-align: center;
+      background: var(--card-bg, rgba(255,255,255,0.05));
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .era-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      background: var(--card-hover, rgba(255,255,255,0.12));
+    }
+
+    .era-card .era-year {
+      font-size: 0.75rem;
+      opacity: 0.55;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .era-card .era-name {
+      font-size: 1.05rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .era-card .era-progress {
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    .era-card .era-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 1rem;
+    }
+
+    /* Era card colors applied inline via JS */
+
+    /* ── QUESTION SCREEN ── */
+    #question-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    #back-btn {
+      background: none;
+      border: 1px solid var(--era-border);
+      color: var(--era-primary);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-family: var(--era-font);
+      transition: background 0.2s;
+    }
+
+    #back-btn:hover { background: var(--era-button-hover); }
+
+    #progress-bar-wrap {
+      flex: 1;
+      margin: 0 1rem;
+      height: 6px;
+      background: var(--era-border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background: var(--era-primary);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    #score-display {
+      font-size: 0.85rem;
+      color: var(--era-primary);
+      white-space: nowrap;
+    }
+
+    /* ── Question Card ── */
+    #question-card {
+      background: var(--era-card);
+      border: 1px solid var(--era-border);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #song-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 0.6rem;
+    }
+
+    #song-title {
+      font-size: 1.05rem;
+      color: var(--era-accent);
+      font-style: italic;
+      margin-bottom: 1.4rem;
+    }
+
+    #question-sentence {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      line-height: 1.7;
+      color: var(--era-text);
+    }
+
+    #question-sentence .blank {
+      display: inline-block;
+      min-width: 140px;
+      border-bottom: 2px solid var(--era-primary);
+      color: var(--era-primary);
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Answer Choices ── */
+    #choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      #choices { grid-template-columns: 1fr; }
+    }
+
+    .choice-btn {
+      padding: 0.9rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--era-border);
+      background: var(--era-button);
+      color: var(--era-text);
+      font-size: 0.98rem;
+      font-family: var(--era-font);
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      line-height: 1.4;
+    }
+
+    .choice-btn:hover:not(:disabled) {
+      background: var(--era-button-hover);
+      border-color: var(--era-primary);
+      transform: translateY(-1px);
+    }
+
+    .choice-btn:disabled { cursor: default; }
+
+    .choice-btn .choice-letter {
+      display: inline-block;
+      font-weight: bold;
+      color: var(--era-primary);
+      margin-right: 0.5rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .choice-btn.correct {
+      background: rgba(74, 222, 128, 0.15);
+      border-color: var(--era-correct);
+      color: #bbf7d0;
+    }
+
+    .choice-btn.wrong {
+      background: rgba(248, 113, 113, 0.15);
+      border-color: var(--era-wrong);
+      color: #fecaca;
+    }
+
+    /* ── Feedback Panel ── */
+    #feedback-panel {
+      display: none;
+      background: var(--era-card);
+      border: 1px solid var(--era-border);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.25rem;
+      animation: fadeUp 0.3s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #feedback-panel.correct-fb { border-color: var(--era-correct); }
+    #feedback-panel.wrong-fb   { border-color: var(--era-wrong); }
+
+    #feedback-result {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 0.6rem;
+    }
+
+    #feedback-panel.correct-fb #feedback-result { color: var(--era-correct); }
+    #feedback-panel.wrong-fb   #feedback-result { color: var(--era-wrong); }
+
+    #feedback-word {
+      font-size: 1.1rem;
+      color: var(--era-primary);
+      font-weight: bold;
+      margin-bottom: 0.15rem;
+    }
+
+    #feedback-pos {
+      font-size: 0.8rem;
+      opacity: 0.55;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    #feedback-def {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    #next-btn {
+      display: block;
+      width: 100%;
+      padding: 0.85rem;
+      margin-top: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--era-border);
+      background: var(--era-button);
+      color: var(--era-primary);
+      font-size: 1rem;
+      font-family: var(--era-font);
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      transition: background 0.2s;
+    }
+
+    #next-btn:hover { background: var(--era-button-hover); }
+
+    /* ── RESULTS SCREEN ── */
+    #results-screen {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    #results-era-name {
+      font-size: 0.85rem;
+      opacity: 0.55;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    #results-score {
+      font-size: clamp(3rem, 12vw, 5rem);
+      font-weight: bold;
+      color: var(--era-primary);
+      line-height: 1;
+      margin: 1rem 0 0.25rem;
+    }
+
+    #results-label {
+      font-size: 1rem;
+      opacity: 0.6;
+      margin-bottom: 2rem;
+    }
+
+    #results-message {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--era-accent);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Missed words review */
+    #missed-section {
+      text-align: left;
+      margin-top: 2rem;
+    }
+
+    #missed-section h3 {
+      color: var(--era-primary);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .missed-word {
+      background: var(--era-card);
+      border: 1px solid var(--era-border);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .missed-word-name {
+      font-size: 1rem;
+      color: var(--era-primary);
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+    }
+
+    .missed-word-pos {
+      font-size: 0.78rem;
+      opacity: 0.5;
+      font-style: italic;
+      margin-bottom: 0.3rem;
+    }
+
+    .missed-word-def {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      opacity: 0.8;
+    }
+
+    .results-actions {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .results-actions button {
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--era-border);
+      font-family: var(--era-font);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #retry-btn {
+      background: var(--era-button);
+      color: var(--era-primary);
+    }
+
+    #retry-btn:hover { background: var(--era-button-hover); }
+
+    #home-btn {
+      background: var(--era-button);
+      color: var(--era-text);
+      opacity: 0.8;
+    }
+
+    #home-btn:hover { background: var(--era-button-hover); opacity: 1; }
+
+    /* ── Utilities ── */
+    .visually-hidden { display: none; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--era-border); border-radius: 3px; }
+  </style>
+</head>
+<body class="era-midnights">
+
+<div id="app">
+
+  <!-- ══ SCREEN 1: ERA SELECTION ══ -->
+  <div id="home-screen" class="screen active">
+    <h1>Lyric Decoder</h1>
+    <p class="subtitle">SAT Vocab · Taylor Swift Edition</p>
+    <p style="text-align:center; opacity:0.65; font-size:0.9rem; margin-bottom:2rem; line-height:1.6;">
+      Each question connects an SAT word to a Taylor Swift song.<br>
+      Pick an era to begin.
+    </p>
+    <div id="era-grid"></div>
+  </div>
+
+  <!-- ══ SCREEN 2: QUESTION ══ -->
+  <div id="question-screen" class="screen">
+    <div id="question-header">
+      <button id="back-btn">← Eras</button>
+      <div id="progress-bar-wrap">
+        <div id="progress-bar" style="width:0%"></div>
+      </div>
+      <div id="score-display">0 / 0</div>
+    </div>
+
+    <div id="question-card">
+      <div id="song-label">🎵 Song</div>
+      <div id="song-title"></div>
+      <div id="question-sentence"></div>
+    </div>
+
+    <div id="choices"></div>
+
+    <div id="feedback-panel">
+      <div id="feedback-result"></div>
+      <div id="feedback-word"></div>
+      <div id="feedback-pos"></div>
+      <div id="feedback-def"></div>
+      <button id="next-btn">Next →</button>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN 3: RESULTS ══ -->
+  <div id="results-screen" class="screen">
+    <div id="results-era-name"></div>
+    <h2>Quiz Complete</h2>
+    <div id="results-score"></div>
+    <div id="results-label">correct</div>
+    <div id="results-message"></div>
+
+    <div class="results-actions">
+      <button id="retry-btn">Try Again</button>
+      <button id="home-btn">← All Eras</button>
+    </div>
+
+    <div id="missed-section">
+      <h3>Words to Review</h3>
+      <div id="missed-list"></div>
+    </div>
+  </div>
+
+</div><!-- /app -->
+
+<script>
+// ════════════════════════════════════════════════════════
+//  LYRIC DECODER — Game Logic
+// ════════════════════════════════════════════════════════
+
+const ERAS = [
+  { id: 'taylor-swift', name: 'Taylor Swift',  year: '2006', file: 'taylor-swift.json',  cssClass: 'era-taylor-swift',  emoji: '🌟', difficulty: 'easy' },
+  { id: 'fearless',     name: 'Fearless',       year: '2008', file: 'fearless.json',       cssClass: 'era-fearless',       emoji: '✨', difficulty: 'easy' },
+  { id: 'speak-now',    name: 'Speak Now',       year: '2010', file: 'speak-now.json',      cssClass: 'era-speak-now',      emoji: '💜', difficulty: 'easy' },
+  { id: 'red',          name: 'Red',             year: '2012', file: 'red.json',            cssClass: 'era-red',            emoji: '🍂', difficulty: 'medium' },
+  { id: '1989',         name: '1989',            year: '2014', file: '1989.json',           cssClass: 'era-1989',           emoji: '📷', difficulty: 'medium' },
+  { id: 'reputation',   name: 'reputation',      year: '2017', file: 'reputation.json',     cssClass: 'era-reputation',     emoji: '🐍', difficulty: 'medium' },
+  { id: 'lover',        name: 'Lover',           year: '2019', file: 'lover.json',          cssClass: 'era-lover',          emoji: '🌈', difficulty: 'medium' },
+  { id: 'folklore',     name: 'folklore',        year: '2020', file: 'folklore.json',       cssClass: 'era-folklore',       emoji: '🌿', difficulty: 'advanced' },
+  { id: 'evermore',     name: 'evermore',        year: '2020', file: 'evermore.json',       cssClass: 'era-evermore',       emoji: '🍁', difficulty: 'advanced' },
+  { id: 'midnights',    name: 'Midnights',       year: '2022', file: 'midnights.json',      cssClass: 'era-midnights',      emoji: '🌙', difficulty: 'advanced' },
+  { id: 'ttpd',         name: 'TTPD',            year: '2024', file: 'ttpd.json',           cssClass: 'era-ttpd',           emoji: '🖊️', difficulty: 'advanced' },
+];
+
+const DIFFICULTY_CONFIG = {
+  easy:     { label: 'Easy',     description: 'Foundational SAT vocabulary',       color: '#4ade80' },
+  medium:   { label: 'Medium',   description: 'Standard SAT vocabulary',           color: '#fb923c' },
+  advanced: { label: 'Advanced', description: 'Most challenging SAT vocabulary',   color: '#f87171' },
+};
+
+// Era card accent colors (for inline styling on home screen)
+const ERA_CARD_STYLES = {
+  'taylor-swift': { bg: 'rgba(245,200,66,0.08)',  border: 'rgba(245,200,66,0.35)',  text: '#f5c842' },
+  'fearless':     { bg: 'rgba(255,192,76,0.08)',  border: 'rgba(255,192,76,0.35)',  text: '#ffc04c' },
+  'speak-now':    { bg: 'rgba(192,132,252,0.08)', border: 'rgba(192,132,252,0.35)', text: '#c084fc' },
+  'red':          { bg: 'rgba(239,68,68,0.08)',   border: 'rgba(239,68,68,0.35)',   text: '#ef4444' },
+  '1989':         { bg: 'rgba(96,165,250,0.08)',  border: 'rgba(96,165,250,0.35)',  text: '#60a5fa' },
+  'reputation':   { bg: 'rgba(209,213,219,0.06)', border: 'rgba(209,213,219,0.25)', text: '#d1d5db' },
+  'lover':        { bg: 'rgba(244,114,182,0.08)', border: 'rgba(244,114,182,0.35)', text: '#f472b6' },
+  'folklore':     { bg: 'rgba(156,163,175,0.07)', border: 'rgba(156,163,175,0.28)', text: '#9ca3af' },
+  'evermore':     { bg: 'rgba(217,119,6,0.08)',   border: 'rgba(217,119,6,0.35)',   text: '#d97706' },
+  'midnights':    { bg: 'rgba(167,139,250,0.08)', border: 'rgba(167,139,250,0.32)', text: '#a78bfa' },
+  'ttpd':         { bg: 'rgba(212,197,160,0.07)', border: 'rgba(212,197,160,0.28)', text: '#d4c5a0' },
+};
+
+// ── State ──────────────────────────────────────────────
+let state = {
+  currentEra: null,
+  questions: [],      // shuffled array for current session
+  questionIndex: 0,
+  score: 0,
+  missed: [],         // { word, definition, part_of_speech }
+  progress: {},       // { eraId: { best: n, played: bool } }  — persisted in localStorage
+};
+
+// ── Persistence ─────────────────────────────────────────
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem('lyric-decoder-progress');
+    if (saved) state.progress = JSON.parse(saved);
+  } catch (e) { /* ignore */ }
+}
+
+function saveProgress() {
+  try {
+    localStorage.setItem('lyric-decoder-progress', JSON.stringify(state.progress));
+  } catch (e) { /* ignore */ }
+}
+
+// ── Utilities ───────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function show(id)  { document.getElementById(id).classList.add('active'); }
+function hide(id)  { document.getElementById(id).classList.remove('active'); }
+function showOnly(id) {
+  ['home-screen','question-screen','results-screen'].forEach(s => hide(s));
+  show(id);
+}
+
+function setEraTheme(cssClass) {
+  document.body.className = cssClass;
+}
+
+// ── Build Era Selection Grid ─────────────────────────────
+function buildHomeScreen() {
+  const container = document.getElementById('era-grid');
+  container.innerHTML = '';
+
+  ['easy', 'medium', 'advanced'].forEach(diff => {
+    const config = DIFFICULTY_CONFIG[diff];
+    const erasInTier = ERAS.filter(e => e.difficulty === diff);
+
+    // Section header
+    const section = document.createElement('div');
+    section.className = 'difficulty-section';
+
+    const header = document.createElement('div');
+    header.className = 'difficulty-header';
+    header.innerHTML = `
+      <span class="difficulty-label" style="color:${config.color}">${config.label}</span>
+      <span class="difficulty-desc">${config.description}</span>
+    `;
+    section.appendChild(header);
+
+    // Era cards grid
+    const grid = document.createElement('div');
+    grid.className = 'era-row';
+
+    erasInTier.forEach(era => {
+      const prog = state.progress[era.id];
+      const bestScore = prog ? prog.best : null;
+      const played = prog && prog.played;
+      const style = ERA_CARD_STYLES[era.id];
+
+      const card = document.createElement('div');
+      card.className = 'era-card';
+      card.style.background = style.bg;
+      card.style.borderColor = style.border;
+
+      card.innerHTML = `
+        <div class="era-badge">${era.emoji}</div>
+        <div class="era-year">${era.year}</div>
+        <div class="era-name" style="color:${style.text}">${era.name}</div>
+        <div class="era-progress">
+          ${played ? `Best: ${bestScore}/20` : '20 questions'}
+        </div>
+        ${played && bestScore === 20 ? '<div style="font-size:0.8rem;margin-top:0.3rem;color:#4ade80">✓ Perfect!</div>' : ''}
+      `;
+
+      card.addEventListener('click', () => startEra(era));
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+}
+
+// ── Start Era ────────────────────────────────────────────
+async function startEra(era) {
+  state.currentEra = era;
+  setEraTheme(era.cssClass);
+
+  let questions;
+  try {
+    const res = await fetch(`data/questions/${era.file}`);
+    questions = await res.json();
+  } catch (e) {
+    alert('Could not load questions. Make sure you are running this via a local server (e.g. python3 -m http.server).');
+    return;
+  }
+
+  state.questions = shuffle(questions);
+  state.questionIndex = 0;
+  state.score = 0;
+  state.missed = [];
+
+  showOnly('question-screen');
+  renderQuestion();
+}
+
+// ── Render Question ──────────────────────────────────────
+function renderQuestion() {
+  const q = state.questions[state.questionIndex];
+  const total = state.questions.length;
+
+  // Header
+  const pct = (state.questionIndex / total) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('score-display').textContent = `${state.score} / ${state.questionIndex}`;
+
+  // Song
+  document.getElementById('song-title').textContent = `"${q.song_title}"`;
+
+  // Sentence: replace __________ with a styled blank
+  const sentenceEl = document.getElementById('question-sentence');
+  const parts = q.sentence.split('__________');
+  sentenceEl.innerHTML = parts[0] + '<span class="blank">__________</span>' + (parts[1] || '');
+
+  // Build 4 choices: correct + 3 distractors, shuffled
+  const choices = shuffle([q.word, ...q.distractors]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const choicesEl = document.getElementById('choices');
+  choicesEl.innerHTML = '';
+
+  choices.forEach((choice, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="choice-letter">${letters[i]}.</span> ${choice}`;
+    btn.dataset.choice = choice;
+    btn.addEventListener('click', () => handleAnswer(choice, q, choices));
+    choicesEl.appendChild(btn);
+  });
+
+  // Hide feedback
+  const fp = document.getElementById('feedback-panel');
+  fp.style.display = 'none';
+  fp.className = '';
+}
+
+// ── Handle Answer ────────────────────────────────────────
+function handleAnswer(chosen, q, choices) {
+  const isCorrect = chosen === q.word;
+  if (isCorrect) state.score++;
+  else state.missed.push({ word: q.word, definition: q.definition, part_of_speech: q.part_of_speech });
+
+  // Update progress bar score display
+  document.getElementById('score-display').textContent = `${state.score} / ${state.questionIndex + 1}`;
+
+  // Disable all buttons and highlight
+  document.querySelectorAll('.choice-btn').forEach(btn => {
+    btn.disabled = true;
+    if (btn.dataset.choice === q.word) btn.classList.add('correct');
+    else if (btn.dataset.choice === chosen && !isCorrect) btn.classList.add('wrong');
+  });
+
+  // Fill blank with the correct word
+  const blankEl = document.querySelector('.blank');
+  if (blankEl) {
+    blankEl.textContent = q.word;
+    blankEl.style.borderBottomColor = isCorrect ? 'var(--era-correct)' : 'var(--era-wrong)';
+    blankEl.style.color = isCorrect ? 'var(--era-correct)' : 'var(--era-wrong)';
+  }
+
+  // Show feedback panel
+  const fp = document.getElementById('feedback-panel');
+  fp.style.display = 'block';
+  fp.className = isCorrect ? 'correct-fb' : 'wrong-fb';
+  document.getElementById('feedback-result').textContent = isCorrect ? '✓ Correct!' : '✗ Not quite.';
+  document.getElementById('feedback-word').textContent = q.word;
+  document.getElementById('feedback-pos').textContent = q.part_of_speech;
+  document.getElementById('feedback-def').textContent = q.definition;
+
+  // Update next button label
+  const nextBtn = document.getElementById('next-btn');
+  const isLast = state.questionIndex === state.questions.length - 1;
+  nextBtn.textContent = isLast ? 'See Results →' : 'Next →';
+}
+
+// ── Next Question ────────────────────────────────────────
+document.getElementById('next-btn').addEventListener('click', () => {
+  state.questionIndex++;
+  if (state.questionIndex >= state.questions.length) {
+    showResults();
+  } else {
+    renderQuestion();
+  }
+});
+
+// ── Results ───────────────────────────────────────────────
+function showResults() {
+  const era = state.currentEra;
+  const total = state.questions.length;
+  const score = state.score;
+  const pct = score / total;
+
+  // Persist best score
+  const prev = state.progress[era.id] || {};
+  state.progress[era.id] = {
+    played: true,
+    best: Math.max(score, prev.best || 0),
+  };
+  saveProgress();
+
+  // Update progress bar to 100%
+  document.getElementById('progress-bar').style.width = '100%';
+
+  showOnly('results-screen');
+  document.getElementById('results-era-name').textContent = `${era.emoji} ${era.name} Era`;
+  document.getElementById('results-score').textContent = `${score}/${total}`;
+
+  const messages = {
+    perfect: ['"Long live all the mountains we moved." — You aced it.', '"I had the time of my life fighting dragons with you." — Perfect score!'],
+    great:   ['"I\'m shining like fireworks over your sad, empty town." — Great work!', '"She lost him but she found herself." — Strong performance.'],
+    good:    ['"We begin again." — Good effort — keep going.', '"I\'m doing better than I ever was." — Solid start.'],
+    keep_going: ['"Just keep swimming." Wait, wrong fandom. But you\'re getting there.', '"Out of the woods yet? Keep practicing."'],
+  };
+
+  let pool;
+  if (pct === 1)       pool = messages.perfect;
+  else if (pct >= 0.8) pool = messages.great;
+  else if (pct >= 0.6) pool = messages.good;
+  else                 pool = messages.keep_going;
+
+  document.getElementById('results-message').textContent = pool[Math.floor(Math.random() * pool.length)];
+
+  // Missed words
+  const missedList = document.getElementById('missed-list');
+  missedList.innerHTML = '';
+
+  const missedSection = document.getElementById('missed-section');
+  if (state.missed.length === 0) {
+    missedSection.innerHTML = '<p style="text-align:center;opacity:0.6;font-style:italic;margin-top:1.5rem">No words to review — you got them all!</p>';
+  } else {
+    missedSection.innerHTML = '<h3>Words to Review</h3><div id="missed-list"></div>';
+    const ml = document.getElementById('missed-list');
+    state.missed.forEach(m => {
+      const div = document.createElement('div');
+      div.className = 'missed-word';
+      div.innerHTML = `
+        <div class="missed-word-name">${m.word}</div>
+        <div class="missed-word-pos">${m.part_of_speech}</div>
+        <div class="missed-word-def">${m.definition}</div>
+      `;
+      ml.appendChild(div);
+    });
+  }
+}
+
+// ── Button handlers ──────────────────────────────────────
+document.getElementById('back-btn').addEventListener('click', () => {
+  setEraTheme('era-midnights');
+  showOnly('home-screen');
+  buildHomeScreen();
+});
+
+document.getElementById('retry-btn').addEventListener('click', () => {
+  startEra(state.currentEra);
+});
+
+document.getElementById('home-btn').addEventListener('click', () => {
+  setEraTheme('era-midnights');
+  showOnly('home-screen');
+  buildHomeScreen();
+});
+
+// ── Init ─────────────────────────────────────────────────
+loadProgress();
+buildHomeScreen();
+</script>
+</body>
+</html>

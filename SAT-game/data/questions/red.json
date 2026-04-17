@@ -1,0 +1,162 @@
+[
+  {
+    "word": "ephemeral",
+    "definition": "lasting for a very short time",
+    "part_of_speech": "adj.",
+    "song_title": "All Too Well",
+    "sentence": "The happiness they'd shared was __________, beautiful precisely because it vanished before she could hold onto it.",
+    "distractors": ["eternal", "enduring", "permanent"]
+  },
+  {
+    "word": "melancholy",
+    "definition": "a feeling of pensive sadness, typically with no obvious cause",
+    "part_of_speech": "n./adj.",
+    "song_title": "Sad Beautiful Tragic",
+    "sentence": "The song existed in a space of pure __________ — not despair exactly, but a sadness too beautiful to fully release.",
+    "distractors": ["elation", "exuberance", "euphoria"]
+  },
+  {
+    "word": "turbulent",
+    "definition": "characterized by conflict, disorder, or confusion; not stable or calm",
+    "part_of_speech": "adj.",
+    "song_title": "State of Grace",
+    "sentence": "Their relationship was __________ from the start — electric and unstable, the kind that burns bright and fast.",
+    "distractors": ["calm", "serene", "tranquil"]
+  },
+  {
+    "word": "volatile",
+    "definition": "liable to change rapidly and unpredictably, especially for the worse",
+    "part_of_speech": "adj.",
+    "song_title": "Treacherous",
+    "sentence": "She knew the situation was __________ and that one wrong move would bring the whole beautiful disaster crashing down.",
+    "distractors": ["stable", "predictable", "steady"]
+  },
+  {
+    "word": "capricious",
+    "definition": "given to sudden and unaccountable changes of mood or behavior",
+    "part_of_speech": "adj.",
+    "song_title": "Red",
+    "sentence": "Love, she realized, was entirely __________ — arriving without warning, leaving the same way, following no rule she could learn.",
+    "distractors": ["consistent", "reliable", "predictable"]
+  },
+  {
+    "word": "anguish",
+    "definition": "severe mental or physical pain or suffering",
+    "part_of_speech": "n.",
+    "song_title": "All Too Well",
+    "sentence": "The scarf left on the shelf was a small object carrying enormous __________ — the weight of everything she hadn't been able to say.",
+    "distractors": ["joy", "indifference", "contentment"]
+  },
+  {
+    "word": "bereft",
+    "definition": "lacking something or feeling a great loss; desolate",
+    "part_of_speech": "adj.",
+    "song_title": "The Last Time",
+    "sentence": "When he finally left for good, she stood in the kitchen feeling utterly __________, as if something essential had been removed.",
+    "distractors": ["fulfilled", "satisfied", "complete"]
+  },
+  {
+    "word": "poignant",
+    "definition": "evoking a keen sense of sadness or regret; sharply felt",
+    "part_of_speech": "adj.",
+    "song_title": "Sad Beautiful Tragic",
+    "sentence": "The melody was almost unbearably __________ — the kind that catches in your chest and simply doesn't let go.",
+    "distractors": ["trivial", "hollow", "forgettable"]
+  },
+  {
+    "word": "bittersweet",
+    "definition": "containing elements of both pleasure and pain; arousing mixed feelings",
+    "part_of_speech": "adj.",
+    "song_title": "Begin Again",
+    "sentence": "Moving on felt __________ — a new beginning that couldn't fully escape the shadow of the ending that came before it.",
+    "distractors": ["purely joyful", "triumphant", "uncomplicated"]
+  },
+  {
+    "word": "cathartic",
+    "definition": "providing psychological relief through the open expression of strong emotion",
+    "part_of_speech": "adj.",
+    "song_title": "22",
+    "sentence": "Dancing in the dark with strangers was somehow __________ — a way of releasing everything she'd been carrying without having to name it.",
+    "distractors": ["repressive", "stifling", "numbing"]
+  },
+  {
+    "word": "desolate",
+    "definition": "feeling or showing great unhappiness or loneliness; bleak",
+    "part_of_speech": "adj.",
+    "song_title": "The Last Time",
+    "sentence": "She waited in that __________ apartment, knowing he wasn't coming back but not yet ready to let herself believe it.",
+    "distractors": ["lively", "bustling", "warm"]
+  },
+  {
+    "word": "tumultuous",
+    "definition": "making a loud, confused noise; excited, confused, or disorderly",
+    "part_of_speech": "adj.",
+    "song_title": "I Knew You Were Trouble",
+    "sentence": "Looking back, she could see just how __________ those months had been — all chaos and collision and aftermath.",
+    "distractors": ["peaceful", "uneventful", "gentle"]
+  },
+  {
+    "word": "tempestuous",
+    "definition": "characterized by strong and turbulent emotions; stormy",
+    "part_of_speech": "adj.",
+    "song_title": "State of Grace",
+    "sentence": "Their love was __________ in every sense — beautiful and violent, like a storm you run toward instead of away from.",
+    "distractors": ["placid", "gentle", "mild"]
+  },
+  {
+    "word": "remorse",
+    "definition": "deep regret or guilt for a wrong committed",
+    "part_of_speech": "n.",
+    "song_title": "Back to December",
+    "sentence": "She was consumed by __________ over how she'd treated him — the apology forming in her throat too late to matter.",
+    "distractors": ["satisfaction", "pride", "relief"]
+  },
+  {
+    "word": "nostalgic",
+    "definition": "feeling a longing for the past; experiencing sentimental affection for former times",
+    "part_of_speech": "adj.",
+    "song_title": "All Too Well",
+    "sentence": "Every autumn made her __________, pulling her back to the year everything changed and nothing could be undone.",
+    "distractors": ["indifferent", "forward-looking", "detached"]
+  },
+  {
+    "word": "fleeting",
+    "definition": "lasting for a very short time; passing swiftly",
+    "part_of_speech": "adj.",
+    "song_title": "Holy Ground",
+    "sentence": "The joy of that era was __________ — present and golden and gone before she understood what she'd been holding.",
+    "distractors": ["lasting", "permanent", "enduring"]
+  },
+  {
+    "word": "rueful",
+    "definition": "expressing sorrow or regret, especially in a wry or understated way",
+    "part_of_speech": "adj.",
+    "song_title": "Sad Beautiful Tragic",
+    "sentence": "She sang the final verse with a __________ half-smile — as if the memory was something she'd made peace with but hadn't stopped regretting.",
+    "distractors": ["triumphant", "indifferent", "jubilant"]
+  },
+  {
+    "word": "dolorous",
+    "definition": "feeling or expressing great sorrow or distress",
+    "part_of_speech": "adj.",
+    "song_title": "I Almost Do",
+    "sentence": "The song had a __________ quality — an aching sadness she didn't try to soften or resolve, just let sit.",
+    "distractors": ["celebratory", "lighthearted", "animated"]
+  },
+  {
+    "word": "yearning",
+    "definition": "a feeling of intense longing for something",
+    "part_of_speech": "n.",
+    "song_title": "The Lucky One",
+    "sentence": "Beneath all the fame was a quiet __________ — for ordinary mornings, ordinary names, a life lived without a spotlight.",
+    "distractors": ["indifference", "revulsion", "contempt"]
+  },
+  {
+    "word": "transient",
+    "definition": "lasting only for a short time; impermanent",
+    "part_of_speech": "adj.",
+    "song_title": "Everything Has Changed",
+    "sentence": "She had assumed that the feeling was __________ — just a passing thing — until she woke up still thinking about him.",
+    "distractors": ["permanent", "lasting", "enduring"]
+  }
+]

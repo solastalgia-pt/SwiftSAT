@@ -1,0 +1,162 @@
+[
+  {
+    "word": "audacity",
+    "definition": "a willingness to take bold risks; rude or disrespectful behavior",
+    "part_of_speech": "n.",
+    "song_title": "Speak Now",
+    "sentence": "She had the __________ to walk into a stranger's wedding and declare her love in front of everyone.",
+    "distractors": ["timidity", "restraint", "hesitation"]
+  },
+  {
+    "word": "eloquent",
+    "definition": "fluent or persuasive in speaking or writing",
+    "part_of_speech": "adj.",
+    "song_title": "Long Live",
+    "sentence": "Her speech was remarkably __________, weaving every memory of their shared journey into something that felt like a monument.",
+    "distractors": ["inarticulate", "incoherent", "clumsy"]
+  },
+  {
+    "word": "resolute",
+    "definition": "admirably purposeful, determined, and unwavering",
+    "part_of_speech": "adj.",
+    "song_title": "Mean",
+    "sentence": "Despite his cruelty, she remained __________ in her belief that she would outlast every unkind word he'd ever said.",
+    "distractors": ["wavering", "indecisive", "uncertain"]
+  },
+  {
+    "word": "vehement",
+    "definition": "showing strong feeling; forceful, passionate, or intense",
+    "part_of_speech": "adj.",
+    "song_title": "Dear John",
+    "sentence": "Her anger was __________, burning through every verse like something that had been held back too long and finally let loose.",
+    "distractors": ["mild", "passive", "subdued"]
+  },
+  {
+    "word": "forthright",
+    "definition": "direct and outspoken; frank",
+    "part_of_speech": "adj.",
+    "song_title": "Speak Now",
+    "sentence": "She was entirely __________ about her feelings — no hints, no riddles, just the plain truth spoken in front of everyone.",
+    "distractors": ["evasive", "indirect", "cryptic"]
+  },
+  {
+    "word": "conviction",
+    "definition": "a firmly held belief or opinion; certainty about something",
+    "part_of_speech": "n.",
+    "song_title": "Long Live",
+    "sentence": "She sang with such deep __________ that the audience believed every word, as if she were testifying to something sacred.",
+    "distractors": ["doubt", "hesitation", "uncertainty"]
+  },
+  {
+    "word": "staunch",
+    "definition": "very loyal and committed in attitude",
+    "part_of_speech": "adj.",
+    "song_title": "Mean",
+    "sentence": "She was a __________ defender of her own worth, refusing to shrink just because someone wanted her smaller.",
+    "distractors": ["weak", "wavering", "uncommitted"]
+  },
+  {
+    "word": "tenacious",
+    "definition": "tending to keep a firm hold; not readily giving up",
+    "part_of_speech": "adj.",
+    "song_title": "Back to December",
+    "sentence": "Even through heartbreak and regret, she was __________ in her belief that honesty — even offered late — was still worth something.",
+    "distractors": ["submissive", "yielding", "passive"]
+  },
+  {
+    "word": "vociferous",
+    "definition": "expressing or characterized by vehement opinions; loud and forceful",
+    "part_of_speech": "adj.",
+    "song_title": "The Story of Us",
+    "sentence": "The silence between them was deafening precisely because they had both been so __________ before everything fell apart.",
+    "distractors": ["quiet", "restrained", "muted"]
+  },
+  {
+    "word": "manifest",
+    "definition": "to display or show a quality or feeling by one's acts; to make evident",
+    "part_of_speech": "v.",
+    "song_title": "Enchanted",
+    "sentence": "Her hope __________ itself in the way she lingered at the door, unwilling to leave, unwilling to let the night end.",
+    "distractors": ["conceal", "suppress", "hide"]
+  },
+  {
+    "word": "unwavering",
+    "definition": "steady or resolute; not wavering",
+    "part_of_speech": "adj.",
+    "song_title": "Long Live",
+    "sentence": "Their faith in each other was __________ — a fixed point in a world that kept shifting beneath their feet.",
+    "distractors": ["fickle", "inconsistent", "faltering"]
+  },
+  {
+    "word": "advocate",
+    "definition": "to publicly recommend or support a cause or policy",
+    "part_of_speech": "v.",
+    "song_title": "Innocent",
+    "sentence": "She chose to __________ for forgiveness rather than punishment, believing that people could change if given the chance.",
+    "distractors": ["condemn", "oppose", "discredit"]
+  },
+  {
+    "word": "steadfast",
+    "definition": "resolutely or dutifully firm and unwavering",
+    "part_of_speech": "adj.",
+    "song_title": "Mean",
+    "sentence": "She stayed __________ in her dream of a bigger life, even when every voice around her said it wasn't possible.",
+    "distractors": ["fickle", "erratic", "unstable"]
+  },
+  {
+    "word": "candor",
+    "definition": "the quality of being open and honest in expression; frankness",
+    "part_of_speech": "n.",
+    "song_title": "Back to December",
+    "sentence": "She delivered her apology with rare __________, not softening a single word, not excusing a single mistake.",
+    "distractors": ["evasiveness", "deception", "vagueness"]
+  },
+  {
+    "word": "proclaim",
+    "definition": "to announce officially or publicly",
+    "part_of_speech": "v.",
+    "song_title": "Speak Now",
+    "sentence": "She stepped forward to __________ the truth she'd been holding in for months, not caring who heard.",
+    "distractors": ["conceal", "whisper", "deny"]
+  },
+  {
+    "word": "assert",
+    "definition": "to state a fact or belief confidently and forcefully",
+    "part_of_speech": "v.",
+    "song_title": "Better Than Revenge",
+    "sentence": "She knew she had to __________ herself or spend the rest of her life letting other people write her story.",
+    "distractors": ["suppress", "yield", "retreat"]
+  },
+  {
+    "word": "articulate",
+    "definition": "to express an idea or feeling clearly; having clear pronunciation",
+    "part_of_speech": "v.",
+    "song_title": "Dear John",
+    "sentence": "She found a way to __________ the betrayal in verse, giving shape and language to feelings she hadn't known how to carry.",
+    "distractors": ["obscure", "muddle", "confuse"]
+  },
+  {
+    "word": "impetuous",
+    "definition": "acting or done quickly and without thought or care",
+    "part_of_speech": "adj.",
+    "song_title": "Sparks Fly",
+    "sentence": "She was __________ in love — always leaping before looking, always choosing the feeling over the plan.",
+    "distractors": ["cautious", "deliberate", "measured"]
+  },
+  {
+    "word": "implore",
+    "definition": "to beg someone earnestly or desperately to do something",
+    "part_of_speech": "v.",
+    "song_title": "Last Kiss",
+    "sentence": "She wanted to __________ him to stay, to choose differently, to see what she could already see they were throwing away.",
+    "distractors": ["command", "forbid", "ignore"]
+  },
+  {
+    "word": "lament",
+    "definition": "to express grief or sorrow; a passionate expression of grief",
+    "part_of_speech": "v./n.",
+    "song_title": "Last Kiss",
+    "sentence": "The final verses became a quiet __________, each detail she named a small monument to something she could no longer hold.",
+    "distractors": ["celebration", "boast", "taunt"]
+  }
+]

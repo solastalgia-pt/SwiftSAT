@@ -1,0 +1,162 @@
+[
+  {
+    "word": "ethereal",
+    "definition": "extremely delicate and light in a way that seems too perfect for this world",
+    "part_of_speech": "adj.",
+    "song_title": "cardigan",
+    "sentence": "The production had an __________ quality, as if the music had been recorded somewhere between waking and dreaming.",
+    "distractors": ["coarse", "harsh", "grating"]
+  },
+  {
+    "word": "contemplative",
+    "definition": "expressing or involving prolonged thought; given to deep thinking",
+    "part_of_speech": "adj.",
+    "song_title": "seven",
+    "sentence": "The song was quiet and __________, the kind that invites you to sit with a memory rather than process it.",
+    "distractors": ["frenetic", "urgent", "restless"]
+  },
+  {
+    "word": "introspective",
+    "definition": "examining one's own thoughts and feelings; looking inward",
+    "part_of_speech": "adj.",
+    "song_title": "this is me trying",
+    "sentence": "She was in a deeply __________ season of her life, turning every emotion inward and examining it by whatever light she had.",
+    "distractors": ["extroverted", "oblivious", "unreflective"]
+  },
+  {
+    "word": "pensive",
+    "definition": "engaged in, involving, or reflecting deep or serious thought",
+    "part_of_speech": "adj.",
+    "song_title": "hoax",
+    "sentence": "She sat at the piano in a __________ silence, fingers hovering, not yet sure how to say what she needed the song to carry.",
+    "distractors": ["frantic", "flippant", "inattentive"]
+  },
+  {
+    "word": "muse",
+    "definition": "a person or personified force who is the source of inspiration for a creative artist",
+    "part_of_speech": "n.",
+    "song_title": "the last great american dynasty",
+    "sentence": "The eccentric woman who had lived in the house before her became a kind of __________ — a life too interesting not to write about.",
+    "distractors": ["adversary", "distraction", "obstacle"]
+  },
+  {
+    "word": "esoteric",
+    "definition": "intended for or likely to be understood by only a small number of people with specialized knowledge",
+    "part_of_speech": "adj.",
+    "song_title": "exile",
+    "sentence": "The lyrics were deliberately __________, written in a kind of private language only someone who'd lived the experience could decode.",
+    "distractors": ["obvious", "accessible", "commonplace"]
+  },
+  {
+    "word": "pastoral",
+    "definition": "relating to the pleasures of the countryside; charmingly simple and serene",
+    "part_of_speech": "adj.",
+    "song_title": "seven",
+    "sentence": "The images in the song were almost __________ — bare feet, open fields, the clean geography of childhood before everything gets complicated.",
+    "distractors": ["urban", "industrial", "metropolitan"]
+  },
+  {
+    "word": "elegy",
+    "definition": "a poem or song of mourning; a mournful or plaintive poem",
+    "part_of_speech": "n.",
+    "song_title": "my tears ricochet",
+    "sentence": "The song functioned as a kind of __________, a formal mourning for a relationship that had died before anyone admitted it was over.",
+    "distractors": ["celebration", "satire", "comedy"]
+  },
+  {
+    "word": "reclusive",
+    "definition": "avoiding the company of other people; solitary",
+    "part_of_speech": "adj.",
+    "song_title": "the last great american dynasty",
+    "sentence": "The woman described in the song had become increasingly __________ over the years, retreating from the world she'd once owned.",
+    "distractors": ["gregarious", "sociable", "outgoing"]
+  },
+  {
+    "word": "reverie",
+    "definition": "a state of being pleasantly lost in one's thoughts; a daydream",
+    "part_of_speech": "n.",
+    "song_title": "cardigan",
+    "sentence": "She lost herself in a __________ while writing it — a trance state where memory and imagination couldn't be separated.",
+    "distractors": ["nightmare", "panic", "frenzy"]
+  },
+  {
+    "word": "funereal",
+    "definition": "having the mournful, dark quality associated with a funeral; oppressively solemn",
+    "part_of_speech": "adj.",
+    "song_title": "hoax",
+    "sentence": "The album closed on a __________ note, the last song stripping everything down to its bones and refusing to offer any comfort at all.",
+    "distractors": ["jubilant", "exuberant", "playful"]
+  },
+  {
+    "word": "evocative",
+    "definition": "bringing strong images, memories, or feelings to mind",
+    "part_of_speech": "adj.",
+    "song_title": "august",
+    "sentence": "The details she chose were so __________ — the backseat, the radio, the specific quality of August light — that the listener could smell the memory.",
+    "distractors": ["vague", "abstract", "forgettable"]
+  },
+  {
+    "word": "equivocal",
+    "definition": "open to more than one interpretation; deliberately ambiguous or unclear",
+    "part_of_speech": "adj.",
+    "song_title": "betty",
+    "sentence": "The song left the outcome deliberately __________, the apology extended but no answer given, the door cracked but never opened.",
+    "distractors": ["unambiguous", "unequivocal", "definitive"]
+  },
+  {
+    "word": "enigmatic",
+    "definition": "difficult to interpret or understand; mysterious",
+    "part_of_speech": "adj.",
+    "song_title": "illicit affairs",
+    "sentence": "She kept the subject of the song deliberately __________, which only made listeners more desperate to decode it.",
+    "distractors": ["transparent", "obvious", "clear"]
+  },
+  {
+    "word": "doleful",
+    "definition": "expressing sorrow; mournful",
+    "part_of_speech": "adj.",
+    "song_title": "hoax",
+    "sentence": "Her voice on the final track was unmistakably __________ — weighted with a grief too settled to be called fresh.",
+    "distractors": ["joyful", "bright", "animated"]
+  },
+  {
+    "word": "ruminate",
+    "definition": "to think deeply about something; to go over in the mind repeatedly",
+    "part_of_speech": "v.",
+    "song_title": "my tears ricochet",
+    "sentence": "She couldn't stop __________ on the betrayal, turning it over like a stone, certain there was something underneath she hadn't yet found.",
+    "distractors": ["dismiss", "ignore", "forget"]
+  },
+  {
+    "word": "solitude",
+    "definition": "the state or situation of being alone; a lonely or uninhabited place",
+    "part_of_speech": "n.",
+    "song_title": "peace",
+    "sentence": "She had come to understand that real love meant accepting her __________ as part of the package — the quiet she needed and couldn't always explain.",
+    "distractors": ["chaos", "clamor", "crowd"]
+  },
+  {
+    "word": "evanescent",
+    "definition": "soon passing out of sight, memory, or existence; quickly fading or disappearing",
+    "part_of_speech": "adj.",
+    "song_title": "august",
+    "sentence": "The relationship was __________ by nature — a summer thing, built without foundations, never meant to survive the first frost.",
+    "distractors": ["permanent", "enduring", "indelible"]
+  },
+  {
+    "word": "elegiac",
+    "definition": "relating to or characteristic of an elegy; mournfully or plaintively sorrowful",
+    "part_of_speech": "adj.",
+    "song_title": "epiphany",
+    "sentence": "The song had an __________ quality — a mournful reverence for those lost that felt more like a prayer than a pop song.",
+    "distractors": ["celebratory", "comedic", "sardonic"]
+  },
+  {
+    "word": "lyrical",
+    "definition": "expressing the writer's emotions in an imaginative and beautiful way; resembling poetry",
+    "part_of_speech": "adj.",
+    "song_title": "the 1",
+    "sentence": "Even her most conversational lines had a __________ quality, a rhythm underneath the rhythm that made them feel like they'd always existed.",
+    "distractors": ["prosaic", "clunky", "monotonous"]
+  }
+]

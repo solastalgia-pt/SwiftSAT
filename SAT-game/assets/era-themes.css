@@ -1,0 +1,187 @@
+/* =====================================================
+   ERA THEMES — SAT Lyric Decoder
+   One CSS class per Taylor Swift album era.
+   Each sets: --era-bg, --era-primary, --era-accent,
+              --era-text, --era-card, --era-button,
+              --era-correct, --era-wrong, --era-font
+   ===================================================== */
+
+:root {
+  --era-bg: #1a1a2e;
+  --era-primary: #e0e0e0;
+  --era-accent: #a78bfa;
+  --era-text: #f0f0f0;
+  --era-card: rgba(255,255,255,0.07);
+  --era-button: rgba(255,255,255,0.12);
+  --era-button-hover: rgba(255,255,255,0.22);
+  --era-correct: #4ade80;
+  --era-wrong: #f87171;
+  --era-border: rgba(255,255,255,0.15);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Taylor Swift (2006) ── Gold / Country / Cornflower */
+.era-taylor-swift {
+  --era-bg: linear-gradient(135deg, #2c1d06 0%, #1a2e1a 100%);
+  --era-bg-solid: #2c1d06;
+  --era-primary: #f5c842;
+  --era-accent: #8ab87a;
+  --era-text: #fdf6e3;
+  --era-card: rgba(245, 200, 66, 0.1);
+  --era-button: rgba(245, 200, 66, 0.15);
+  --era-button-hover: rgba(245, 200, 66, 0.3);
+  --era-border: rgba(245, 200, 66, 0.3);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Fearless (2008) ── Warm Gold / Amber / Glitter */
+.era-fearless {
+  --era-bg: linear-gradient(135deg, #2a1a00 0%, #3d2800 100%);
+  --era-bg-solid: #2a1a00;
+  --era-primary: #ffc04c;
+  --era-accent: #ffdf80;
+  --era-text: #fff8e7;
+  --era-card: rgba(255, 192, 76, 0.1);
+  --era-button: rgba(255, 192, 76, 0.18);
+  --era-button-hover: rgba(255, 192, 76, 0.35);
+  --era-border: rgba(255, 192, 76, 0.35);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Speak Now (2010) ── Purple / Lavender / Fairytale */
+.era-speak-now {
+  --era-bg: linear-gradient(135deg, #1a0a2e 0%, #2d1050 100%);
+  --era-bg-solid: #1a0a2e;
+  --era-primary: #c084fc;
+  --era-accent: #e9d5ff;
+  --era-text: #f5f0ff;
+  --era-card: rgba(192, 132, 252, 0.1);
+  --era-button: rgba(192, 132, 252, 0.18);
+  --era-button-hover: rgba(192, 132, 252, 0.35);
+  --era-border: rgba(192, 132, 252, 0.35);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Red (2012) ── Crimson / Autumn / Maple */
+.era-red {
+  --era-bg: linear-gradient(135deg, #2d0000 0%, #1a0a00 100%);
+  --era-bg-solid: #2d0000;
+  --era-primary: #ef4444;
+  --era-accent: #fca5a5;
+  --era-text: #fff1f0;
+  --era-card: rgba(239, 68, 68, 0.1);
+  --era-button: rgba(239, 68, 68, 0.18);
+  --era-button-hover: rgba(239, 68, 68, 0.32);
+  --era-border: rgba(239, 68, 68, 0.35);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── 1989 (2014) ── Polaroid Blue / Pastel / Retro */
+.era-1989 {
+  --era-bg: linear-gradient(135deg, #0a1628 0%, #0d2044 100%);
+  --era-bg-solid: #0a1628;
+  --era-primary: #60a5fa;
+  --era-accent: #bfdbfe;
+  --era-text: #f0f8ff;
+  --era-card: rgba(96, 165, 250, 0.1);
+  --era-button: rgba(96, 165, 250, 0.18);
+  --era-button-hover: rgba(96, 165, 250, 0.32);
+  --era-border: rgba(96, 165, 250, 0.35);
+  --era-font: 'Helvetica Neue', 'Arial', sans-serif;
+  --era-title-font: 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+/* ── Reputation (2017) ── Black / Silver / Snake */
+.era-reputation {
+  --era-bg: linear-gradient(135deg, #000000 0%, #0d0d0d 100%);
+  --era-bg-solid: #000000;
+  --era-primary: #d1d5db;
+  --era-accent: #6b7280;
+  --era-text: #f9fafb;
+  --era-card: rgba(209, 213, 219, 0.07);
+  --era-button: rgba(209, 213, 219, 0.12);
+  --era-button-hover: rgba(209, 213, 219, 0.22);
+  --era-border: rgba(209, 213, 219, 0.2);
+  --era-font: 'Helvetica Neue', 'Arial', sans-serif;
+  --era-title-font: 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+/* ── Lover (2019) ── Pink / Lavender / Rainbow */
+.era-lover {
+  --era-bg: linear-gradient(135deg, #3d0a3d 0%, #1a0a2a 100%);
+  --era-bg-solid: #3d0a3d;
+  --era-primary: #f472b6;
+  --era-accent: #e9d5ff;
+  --era-text: #fff0f8;
+  --era-card: rgba(244, 114, 182, 0.1);
+  --era-button: rgba(244, 114, 182, 0.18);
+  --era-button-hover: rgba(244, 114, 182, 0.35);
+  --era-border: rgba(244, 114, 182, 0.35);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Folklore (2020) ── Muted Grey / Forest / Cottagecore */
+.era-folklore {
+  --era-bg: linear-gradient(135deg, #1a1a1a 0%, #0d1a0d 100%);
+  --era-bg-solid: #1a1a1a;
+  --era-primary: #9ca3af;
+  --era-accent: #6b9e7a;
+  --era-text: #f5f0e8;
+  --era-card: rgba(156, 163, 175, 0.08);
+  --era-button: rgba(156, 163, 175, 0.14);
+  --era-button-hover: rgba(156, 163, 175, 0.26);
+  --era-border: rgba(156, 163, 175, 0.22);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Evermore (2020) ── Brown / Amber / Plaid Rust */
+.era-evermore {
+  --era-bg: linear-gradient(135deg, #1a0a00 0%, #2d1500 100%);
+  --era-bg-solid: #1a0a00;
+  --era-primary: #d97706;
+  --era-accent: #fcd34d;
+  --era-text: #fdf6ec;
+  --era-card: rgba(217, 119, 6, 0.1);
+  --era-button: rgba(217, 119, 6, 0.18);
+  --era-button-hover: rgba(217, 119, 6, 0.32);
+  --era-border: rgba(217, 119, 6, 0.35);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── Midnights (2022) ── Midnight Blue / Lavender Glitter */
+.era-midnights {
+  --era-bg: linear-gradient(135deg, #0d1b2a 0%, #1a1040 100%);
+  --era-bg-solid: #0d1b2a;
+  --era-primary: #a78bfa;
+  --era-accent: #c4b5fd;
+  --era-text: #f0ecff;
+  --era-card: rgba(167, 139, 250, 0.1);
+  --era-button: rgba(167, 139, 250, 0.18);
+  --era-button-hover: rgba(167, 139, 250, 0.32);
+  --era-border: rgba(167, 139, 250, 0.3);
+  --era-font: 'Georgia', serif;
+  --era-title-font: 'Georgia', serif;
+}
+
+/* ── TTPD (2024) ── Ivory / Typewriter / Sepia */
+.era-ttpd {
+  --era-bg: linear-gradient(135deg, #1a1a12 0%, #0d0d08 100%);
+  --era-bg-solid: #1a1a12;
+  --era-primary: #d4c5a0;
+  --era-accent: #e8dfc8;
+  --era-text: #f5f0e0;
+  --era-card: rgba(212, 197, 160, 0.08);
+  --era-button: rgba(212, 197, 160, 0.14);
+  --era-button-hover: rgba(212, 197, 160, 0.26);
+  --era-border: rgba(212, 197, 160, 0.25);
+  --era-font: 'Courier New', 'Courier', monospace;
+  --era-title-font: 'Courier New', 'Courier', monospace;
+}

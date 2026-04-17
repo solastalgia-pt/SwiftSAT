@@ -1,0 +1,162 @@
+[
+  {
+    "word": "emancipate",
+    "definition": "to set free from legal, social, or political restrictions",
+    "part_of_speech": "v.",
+    "song_title": "Welcome to New York",
+    "sentence": "The city seemed to __________ her — releasing her from every old version of herself she'd grown too small to fit.",
+    "distractors": ["confine", "imprison", "restrict"]
+  },
+  {
+    "word": "autonomous",
+    "definition": "having the freedom to govern itself or control its own affairs; independent",
+    "part_of_speech": "adj.",
+    "song_title": "Clean",
+    "sentence": "She finally felt __________, free to make every decision without the weight of his opinions pressing down on her choices.",
+    "distractors": ["dependent", "controlled", "bound"]
+  },
+  {
+    "word": "metropolitan",
+    "definition": "of or relating to a large city; having an urbane, cultivated character",
+    "part_of_speech": "adj.",
+    "song_title": "Welcome to New York",
+    "sentence": "She had traded small-town roads for something entirely __________ — the pulse of a city that never needed to sleep.",
+    "distractors": ["rural", "provincial", "pastoral"]
+  },
+  {
+    "word": "exhilarate",
+    "definition": "to make someone feel very happy, animated, or elated",
+    "part_of_speech": "v.",
+    "song_title": "Shake It Off",
+    "sentence": "The performance was meant to __________ rather than impress — pure, unfiltered energy released in every direction.",
+    "distractors": ["bore", "sedate", "exhaust"]
+  },
+  {
+    "word": "luminous",
+    "definition": "full of or shedding light; bright; clearly expressed and easy to understand",
+    "part_of_speech": "adj.",
+    "song_title": "Style",
+    "sentence": "She moved through the room in a way that was quietly __________ — the kind of presence that draws attention without demanding it.",
+    "distractors": ["dim", "dull", "unremarkable"]
+  },
+  {
+    "word": "renaissance",
+    "definition": "a revival of or renewed interest in something; a new birth or revival",
+    "part_of_speech": "n.",
+    "song_title": "Welcome to New York",
+    "sentence": "Moving to New York felt like a personal __________ — a rebirth into someone she'd been imagining but not yet dared to become.",
+    "distractors": ["decline", "stagnation", "regression"]
+  },
+  {
+    "word": "liberate",
+    "definition": "to set someone free from a situation that limits their freedom",
+    "part_of_speech": "v.",
+    "song_title": "Shake It Off",
+    "sentence": "She chose to __________ herself from the need for approval, turning every criticism into choreography.",
+    "distractors": ["imprison", "burden", "restrain"]
+  },
+  {
+    "word": "pristine",
+    "definition": "in its original condition; clean and fresh as if new; unspoiled",
+    "part_of_speech": "adj.",
+    "song_title": "Clean",
+    "sentence": "Standing in the rain, she felt __________ — as if the storm had washed away every trace of who she'd been before.",
+    "distractors": ["tainted", "soiled", "corrupted"]
+  },
+  {
+    "word": "invigorating",
+    "definition": "making one feel strong, healthy, and full of energy",
+    "part_of_speech": "adj.",
+    "song_title": "Welcome to New York",
+    "sentence": "The cold morning air on Fifth Avenue was __________ — sharp and clarifying, the opposite of everything she was leaving behind.",
+    "distractors": ["enervating", "draining", "numbing"]
+  },
+  {
+    "word": "resilient",
+    "definition": "able to withstand or recover quickly from difficult conditions",
+    "part_of_speech": "adj.",
+    "song_title": "Out of the Woods",
+    "sentence": "She emerged from those two years __________, carrying the scars but no longer defined by the wounds that made them.",
+    "distractors": ["fragile", "shattered", "broken"]
+  },
+  {
+    "word": "reclaim",
+    "definition": "to retrieve or recover something previously lost or given away",
+    "part_of_speech": "v.",
+    "song_title": "Shake It Off",
+    "sentence": "She decided to __________ the narrative — stepping into the story others had written about her and rewriting the ending herself.",
+    "distractors": ["surrender", "abandon", "relinquish"]
+  },
+  {
+    "word": "formidable",
+    "definition": "inspiring fear or respect through being impressively large, powerful, or capable",
+    "part_of_speech": "adj.",
+    "song_title": "Bad Blood",
+    "sentence": "What had once been a friendship became a __________ rivalry, each of them proving what they were capable of without the other.",
+    "distractors": ["trivial", "insignificant", "weak"]
+  },
+  {
+    "word": "cosmopolitan",
+    "definition": "familiar with and at ease in many different cultures and places",
+    "part_of_speech": "adj.",
+    "song_title": "Welcome to New York",
+    "sentence": "New York turned her __________ in ways no small town ever could — exposing her to every kind of person, every kind of story.",
+    "distractors": ["provincial", "narrow", "parochial"]
+  },
+  {
+    "word": "reinvent",
+    "definition": "to change something so much it seems entirely new; to present oneself differently",
+    "part_of_speech": "v.",
+    "song_title": "Out of the Woods",
+    "sentence": "She had survived enough to know that people can __________ themselves entirely — that identity isn't fixed the way everyone pretends.",
+    "distractors": ["repeat", "stagnate", "regress"]
+  },
+  {
+    "word": "undaunted",
+    "definition": "not intimidated or discouraged by difficulty, danger, or disappointment",
+    "part_of_speech": "adj.",
+    "song_title": "Out of the Woods",
+    "sentence": "She was __________ by the dangers of loving someone so intensely — choosing to run through the fire rather than around it.",
+    "distractors": ["deterred", "frightened", "hesitant"]
+  },
+  {
+    "word": "dynamic",
+    "definition": "characterized by constant change, activity, or progress; energetic",
+    "part_of_speech": "adj.",
+    "song_title": "Bad Blood",
+    "sentence": "Their friendship had always been __________, powerful and shifting, which made the betrayal feel like a fault line opening.",
+    "distractors": ["static", "stagnant", "inert"]
+  },
+  {
+    "word": "emerge",
+    "definition": "to come out from somewhere; to become apparent or known",
+    "part_of_speech": "v.",
+    "song_title": "Clean",
+    "sentence": "Slowly, over months of small decisions, a new version of herself began to __________ from the wreckage of who she used to be.",
+    "distractors": ["retreat", "dissolve", "disappear"]
+  },
+  {
+    "word": "candid",
+    "definition": "truthful and straightforward; not hiding one's thoughts",
+    "part_of_speech": "adj.",
+    "song_title": "Blank Space",
+    "sentence": "The song was ruthlessly __________ about the media's version of her — naming the myth outright and then playing it to perfection.",
+    "distractors": ["evasive", "indirect", "misleading"]
+  },
+  {
+    "word": "catharsis",
+    "definition": "the process of releasing strong emotions through art, often resulting in renewal",
+    "part_of_speech": "n.",
+    "song_title": "Clean",
+    "sentence": "Writing the album was a kind of __________ — she emerged from the process lighter than she'd felt in years.",
+    "distractors": ["suppression", "repression", "stagnation"]
+  },
+  {
+    "word": "unbridled",
+    "definition": "uncontrolled; lacking restraint",
+    "part_of_speech": "adj.",
+    "song_title": "Style",
+    "sentence": "There was an __________ quality to the way they moved together — no caution, no hesitation, just pure gravitational pull.",
+    "distractors": ["restrained", "controlled", "measured"]
+  }
+]
